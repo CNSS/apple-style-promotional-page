@@ -4,11 +4,54 @@
 <head>
   <title>Home</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="//unpkg.com/@triggerjs/trigger" defer></script>
   <link rel="stylesheet" href="statics/style.css">
 </head>
 
 <body>
+  <div class="popup match">
+    <div class="popup-container">
+      <button class="popup-close-btn">
+        <span class="btn-icon close-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+              d="M12.12,10l4.07-4.06a1.5,1.5,0,1,0-2.11-2.12L10,7.88,5.94,3.81A1.5,1.5,0,1,0,3.82,5.93L7.88,10,3.81,14.06a1.5,1.5,0,0,0,0,2.12,1.51,1.51,0,0,0,2.13,0L10,12.12l4.06,4.07a1.45,1.45,0,0,0,1.06.44,1.5,1.5,0,0,0,1.06-2.56Z">
+            </path>
+          </svg>
+        </span>
+      </button>
+      <div class="popup-content">
+        <h2>参赛机会</h2>
+        <p>CTF、AWD、Penetration、ASC…</p>
+        <p>众多比赛,总能让你大放光彩。</p>
+        <div class="popup-content-card">
+          <span>
+            我们组队<b>征战于全国甚至全球各大网络安全竞赛</b>, 这些竞赛大多以每月<b>3~4次或更高的频率</b>举办。
+          </span>
+          <div class="popup-content-card-image">
+            <img src="statics/img/comp.jpg" alt="comp" />
+          </div>
+        </div>
+
+        <div class="popup-content-card">
+          <span>
+            在<b>全国各地举办的线下比赛</b>一直是拓宽视野、提升技术的重要途径。在凝聚, 所有线下比赛的<b>费用均由公费报销</b>。
+          </span>
+          <div class="popup-content-card-image">
+            <img src="statics/img/reimbursement.jpg" alt="reimbursement" />
+          </div>
+        </div>
+
+        <div class="popup-content-card">
+          <span>
+            我们<b>不会强制</b>任何工作室内的成员参加比赛或参加训练，你也可以<b><s>每天睡大觉</s></b>，但CNSS会在你想参与比赛时<b>随时欢迎你</b>。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container title wrapper" tg-name="percent" tg-from="1" tg-to="0.01" tg-edge="inset">
     <div class="container title wrapper" tg-name="rev-percent" tg-from="0" tg-to="0.99" tg-edge="inset">
       <div class="container title sticky">
@@ -80,7 +123,7 @@
           <ul class="card-set">
             <li class="list-items">
               <div class="card">
-                <div class="card face" match>
+                <div class="card face" popup="match">
                   <div class="text">
                     <h3>
                       参赛机会
@@ -89,14 +132,25 @@
                     <br />
                     <span>众多比赛,总能让你大放光彩。</span>
                   </div>
+                  <button class="card-more-btn">
+                    <span class="btn-icon more-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        class="card-cta-modal-button-small-icon card-modal-button-small-icon">
+                        <path
+                          d="M17.25,8.51H11.5V2.75A1.5,1.5,0,0,0,10,1.25h0a1.5,1.5,0,0,0-1.5,1.5V8.5H2.75a1.5,1.5,0,0,0,0,3H8.5v5.75a1.5,1.5,0,0,0,1.5,1.5h0a1.5,1.5,0,0,0,1.5-1.5V11.5h5.75a1.5,1.5,0,0,0,0-3Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </button>
                 </div>
                 <button class="card button more"></button>
               </div>
+
             </li>
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" offer>
+                <div class="card face" popup="offer">
                   <div class="text">
                     <h3>
                       实习与Offer
@@ -105,6 +159,16 @@
                     <br />
                     <span>内推机会多多。</span>
                   </div>
+                  <button class="card-more-btn">
+                    <span class="btn-icon more-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        class="card-cta-modal-button-small-icon card-modal-button-small-icon">
+                        <path
+                          d="M17.25,8.51H11.5V2.75A1.5,1.5,0,0,0,10,1.25h0a1.5,1.5,0,0,0-1.5,1.5V8.5H2.75a1.5,1.5,0,0,0,0,3H8.5v5.75a1.5,1.5,0,0,0,1.5,1.5h0a1.5,1.5,0,0,0,1.5-1.5V11.5h5.75a1.5,1.5,0,0,0,0-3Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </button>
                 </div>
                 <button class="card button more"></button>
               </div>
@@ -112,7 +176,7 @@
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" money>
+                <div class="card face" popup="money">
                   <div class="text">
                     <h3>
                       奖金与报酬
@@ -121,6 +185,16 @@
                     <br />
                     <span>线下比赛所有费用均由公费报销。</span>
                   </div>
+                  <button class="card-more-btn">
+                    <span class="btn-icon more-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        class="card-cta-modal-button-small-icon card-modal-button-small-icon">
+                        <path
+                          d="M17.25,8.51H11.5V2.75A1.5,1.5,0,0,0,10,1.25h0a1.5,1.5,0,0,0-1.5,1.5V8.5H2.75a1.5,1.5,0,0,0,0,3H8.5v5.75a1.5,1.5,0,0,0,1.5,1.5h0a1.5,1.5,0,0,0,1.5-1.5V11.5h5.75a1.5,1.5,0,0,0,0-3Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </button>
                 </div>
                 <button class="card button more"></button>
               </div>
@@ -128,7 +202,7 @@
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" train>
+                <div class="card face" popup="train">
                   <div class="text">
                     <h3>
                       内部训练场
@@ -141,6 +215,16 @@
                     <span style="font-style:italic; opacity: 0.8;">P.S. 我们并不会强制工作室内的成员参加比赛或参加训练,
                       但CNSS会在你想参与比赛时随时欢迎你。</span>
                   </div>
+                  <button class="card-more-btn">
+                    <span class="btn-icon more-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        class="card-cta-modal-button-small-icon card-modal-button-small-icon">
+                        <path
+                          d="M17.25,8.51H11.5V2.75A1.5,1.5,0,0,0,10,1.25h0a1.5,1.5,0,0,0-1.5,1.5V8.5H2.75a1.5,1.5,0,0,0,0,3H8.5v5.75a1.5,1.5,0,0,0,1.5,1.5h0a1.5,1.5,0,0,0,1.5-1.5V11.5h5.75a1.5,1.5,0,0,0,0-3Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </button>
                 </div>
                 <button class="card button more"></button>
               </div>
@@ -148,7 +232,7 @@
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" family>
+                <div class="card face" popup="family">
                   <div class="text">
                     <h3>
                       志同道合的好友们
@@ -157,6 +241,16 @@
                     <br />
                     <span>一起交流技术、聚餐、玩桌游、玩游戏和好友们</span>
                   </div>
+                  <button class="card-more-btn">
+                    <span class="btn-icon more-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        class="card-cta-modal-button-small-icon card-modal-button-small-icon">
+                        <path
+                          d="M17.25,8.51H11.5V2.75A1.5,1.5,0,0,0,10,1.25h0a1.5,1.5,0,0,0-1.5,1.5V8.5H2.75a1.5,1.5,0,0,0,0,3H8.5v5.75a1.5,1.5,0,0,0,1.5,1.5h0a1.5,1.5,0,0,0,1.5-1.5V11.5h5.75a1.5,1.5,0,0,0,0-3Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </button>
                 </div>
                 <button class="card button more"></button>
               </div>
@@ -245,6 +339,48 @@
   //     }
   //   });
   // })
+
+  const popupContainers = document.getElementsByClassName("popup-container");
+  for (let i = 0; i < popupContainers.length; i++) {
+    popupContainers[i].addEventListener('click', (e) => {
+      e.stopPropagation();
+    })
+  }
+
+
+  function popup(popupElement) {
+    popupElement.style.display = "block";
+    this.setTimeout(() => {
+      popupElement.style.opacity = 1;
+    }, 0);
+
+    // set overflow:hidden to body and html
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    // add close event
+    function eventClose(popupElement) {
+      popupElement.style.opacity = 0;
+      this.setTimeout(() => {
+        popupElement.style.display = "none";
+      }, 400);
+      // remove overflow:hidden
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    popupElement.getElementsByClassName("popup-close-btn")[0].addEventListener('click', eventClose.bind(this, popupElement));
+    popupElement.addEventListener('click', eventClose.bind(this, popupElement));
+  }
+
+  // Card List-items add popup onclick event
+  const listItems = document.getElementsByClassName("list-items");
+  for (let i = 0; i < listItems.length; i++) {
+    let popupName = listItems[i].getElementsByClassName("card face")[0].getAttribute("popup");
+    console.log(popupName);
+    let popupElement = document.getElementsByClassName("popup " + popupName)[0];
+    listItems[i].addEventListener('click', popup.bind(this, popupElement));
+  }
 </script>
 
 </html>
