@@ -219,8 +219,9 @@ button {
   column-gap: 2rem;
   grid-row-gap: 0px;
   row-gap: 0px;
-  width: fit-content;
-  max-width: 98vw;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
   height: 80vh;
   margin: 2rem 0;
   list-style: none;
