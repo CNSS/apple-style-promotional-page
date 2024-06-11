@@ -322,33 +322,33 @@ button {
 }
 
 .card.face[popup="match"] {
-  background: url('./img/match.JPG'), rgba(0, 0, 0, 0.3);
+  background: url('/statics/img/match.JPG'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: -250px;
 }
 
 .card.face[popup="offer"] {
-  background: url('./img/offer.jpg'), rgba(0, 0, 0, 0.5);
+  background: url('/statics/img/offer.jpg'), rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
   background-size: cover;
 }
 
 .card.face[popup="money"] {
-  background: url('./img/money.png'), rgba(0, 0, 0, 0.4);
+  background: url('/statics/img/money.png'), rgba(0, 0, 0, 0.4);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: -150px;
 }
 
 .card.face[popup="train"] {
-  background: url('./img/train.png'), rgba(0, 0, 0, 0.3);
+  background: url('/statics/img/train.png'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
 }
 
 .card.face[popup="family"] {
-  background: url('./img/family.jpeg'), rgba(0, 0, 0, 0.3);
+  background: url('/statics/img/family.jpeg'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: center;
@@ -581,16 +581,16 @@ button {
   color: inherit;
 }
 
-.popup-content-card-image.yak {
-  position: relative;
-  width: 100%;
-  background-image: url("./img/yak-after.png");
-  background-size: cover;
-}
-
-.popup-content-card-image.yak img {
-  opacity: calc((var(--percent)) * 4);
-}
+/* .popup-content-card-image.yak { */
+/*   position: relative; */
+/*   width: 100%; */
+/*   background-image: url("/statics/img/yak-after.png"); */
+/*   background-size: cover; */
+/* } */
+/**/
+/* .popup-content-card-image.yak img { */
+/*   opacity: calc((var(--percent)) * 4); */
+/* } */
 
 .popup-content-card-image.offers,
 .popup-content-card-image.schools {
