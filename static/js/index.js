@@ -7,7 +7,13 @@ if (window.innerHeight > window.innerWidth) {
 const title_chinese = document.getElementsByClassName("title_chinese")[0]
 const titleWrapper = document.getElementsByClassName("container title wrapper")[0]
 title_chinese.style.setProperty('--perc', "100%")
+
+// Cards 动态加载
+const cardsWrapper = document.getElementsByClassName("container cards wrapper")[0]
+let cardsLoaded = false
+
 document.addEventListener('scroll', (e) => {
+  // 解决直接用 triggerjs 会闪烁的问题
   let scrolled = titleWrapper.style.getPropertyValue('--percent')
   console.log(scrolled)
   if (scrolled > 1) {
@@ -16,6 +22,14 @@ document.addEventListener('scroll', (e) => {
     scrolled = 0
   }
   title_chinese.style.setProperty('--perc', `${scrolled * 100}%`)
+
+  // Cards 动态加载
+  if (cardsWrapper.getBoundingClientRect().top < window.innerHeight && cardsWrapper.getBoundingClientRect().bottom > 0) {
+    if (!cardsLoaded) {
+      cardsLoaded = true
+      // TODO: 加载 Cards
+    }
+  }
 })
 
 // 切换关键词
@@ -36,7 +50,7 @@ document.addEventListener('scroll', (e) => {
   let up = null
   for (let i = 0; i < keywords.length; i++) {
     if (keywords[i].hasAttribute('data-show')) {
-      show = i
+      let show = i
     }
   }
 
@@ -119,12 +133,15 @@ for (let i = 0; i < cardFaces.length; i++) {
 
 // 检测图片滚动进度
 const reimbursement = document.getElementsByClassName("popup-content-card-image reimbursement")
-const matchPopup = document.getElementsByClassName("popup match")[0].getElementsByClassName("popup-container")[0]
+const matchPopup = document.getElementsByClassName("popup money")[0].getElementsByClassName("popup-container")[0]
 matchPopup.addEventListener('scroll', (e) => {
   for (let i = 0; i < reimbursement.length; i++) {
     if (reimbursement[i].getBoundingClientRect().top < window.innerHeight && reimbursement[i].getBoundingClientRect().bottom > 0) {
       let scrolled = 1 - reimbursement[i].getBoundingClientRect().top / window.innerHeight
-      range = [0.1, 0.4]
+      let range = [0.1, 0.4]
+      if (isVertical) {
+        range = [0.0, 0.3]
+      }
       scrolled = (scrolled - range[0]) / (range[1] - range[0])
       if (scrolled > 1) {
         scrolled = 1
@@ -155,13 +172,13 @@ schools.style.setProperty('--bg-opacity', 0)
 // 预加载
 let bg = ""
 for (let i = 0; i < offersImages.length; i++) {
-  bg += `url(/statics/img/offers/${offersImages[i]}.png) no-repeat center center / cover,`
+  bg += `url(/static/img/offers/${offersImages[i]}.png) no-repeat center center / cover,`
 }
 offers.style.setProperty('--bg', bg.slice(0, -1))
 
 bg = ""
 for (let i = 0; i < schoolsImages.length; i++) {
-  bg += `url(/statics/img/schools/${schoolsImages[i]}.png) no-repeat center center / cover,`
+  bg += `url(/static/img/schools/${schoolsImages[i]}.png) no-repeat center center / cover,`
 }
 schools.style.setProperty('--bg', bg.slice(0, -1))
 
@@ -189,7 +206,7 @@ let handler = (e) => {
     let scrolled = 1 - offers.getBoundingClientRect().top / window.innerHeight
     let range = [0.3, 0.8]
     if (isVertical) {
-      range = [0.1, 0.6]
+      range = [0.2, 0.6]
     }
     scrolled = (scrolled - range[0]) / (range[1] - range[0])
     if (scrolled > 1) {
@@ -202,13 +219,13 @@ let handler = (e) => {
     let select = Math.floor(percent)
     let bg = ""
     for (let i = select - 1; i >= 0; i--) {
-      bg += `url("/statics/img/offers/${offersImages[i]}.png") no-repeat center center / cover,`
+      bg += `url("/static/img/offers/${offersImages[i]}.png") no-repeat center center / cover,`
     }
     bg = bg.slice(0, -1)
     if (offers.style.getPropertyValue('--bg') != bg) {
       offers.style.setProperty('--bg', bg)
       if (select < offersImages.length) {
-        offers.style.setProperty('--after-bg', `url("/statics/img/offers/${offersImages[select]}.png") no-repeat center center / cover`)
+        offers.style.setProperty('--after-bg', `url("/static/img/offers/${offersImages[select]}.png") no-repeat center center / cover`)
       } else {
         offers.style.setProperty('--after-bg', `rgba(0, 0, 0, 0)`)
       }
@@ -239,13 +256,13 @@ let handler = (e) => {
     let select = Math.floor(percent)
     let bg = ""
     for (let i = select - 1; i >= 0; i--) {
-      bg += `url("/statics/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
+      bg += `url("/static/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
     }
     bg = bg.slice(0, -1)
     if (schools.style.getPropertyValue('--bg') != bg) {
       schools.style.setProperty('--bg', bg)
       if (select < schoolsImages.length) {
-        schools.style.setProperty('--after-bg', `url("/statics/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
+        schools.style.setProperty('--after-bg', `url("/static/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
       } else {
         schools.style.setProperty('--after-bg', `none`)
       }
@@ -258,3 +275,31 @@ let handler = (e) => {
   }
 }
 offerPopup.addEventListener('scroll', handler)
+
+// 循环切换 nav-bar-element radio
+// <input type="radio" name="nav" id="nav-1" class="nav-bar-element">
+// <input type="radio" name="nav" id="nav-2" class="nav-bar-element">
+// <input type="radio" name="nav" id="nav-3" class="nav-bar-element">
+// <input type="radio" name="nav" id="nav-4" class="nav-bar-element">
+// <input type="radio" name="nav" id="nav-5" class="nav-bar-element">
+// <input type="radio" name="nav" id="nav-6" class="nav-bar-element">
+let navBarElements = document.getElementsByClassName("nav-bar-element")
+let currentNav = 0
+const navImagesDiv = document.getElementsByClassName("nav-images")[0]
+const navIntervalHandler = () => {
+  if (navImagesDiv.getBoundingClientRect().top > window.innerHeight || navImagesDiv.getBoundingClientRect().bottom < 0) {
+    return
+  }
+
+  currentNav = (currentNav + 1) % navBarElements.length
+  navBarElements[currentNav].click()
+}
+let navInterval = setInterval(navIntervalHandler, 3000)
+for (let i = 0; i < navBarElements.length; i++) {
+  navBarElements[i].addEventListener('click', (e) => {
+    currentNav = i
+    clearInterval(navInterval)
+    navInterval = setInterval(navIntervalHandler, 3000)
+  })
+}
+
