@@ -328,6 +328,7 @@
   // 解决直接用 triggerjs 会闪烁的问题
   const title_chinese = document.getElementsByClassName("title_chinese")[0];
   const titleWrapper = document.getElementsByClassName("container title wrapper")[0];
+  title_chinese.style.setProperty('--perc', "0%")
   document.addEventListener('scroll', (e) => {
     let scrolled = titleWrapper.style.getPropertyValue('--percent');
     console.log(scrolled)
