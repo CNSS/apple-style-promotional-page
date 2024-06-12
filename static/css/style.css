@@ -894,39 +894,39 @@ input[type="radio"] {
   display: inline-block;
   overflow: hidden;
   width: auto;
+}
 
-  div {
-    overflow: hidden;
-    white-space: nowrap;
-    width: fit-content;
-  }
+.terminal-prompt div {
+  overflow: hidden;
+  white-space: nowrap;
+  width: fit-content;
+}
 
-  .prompt-start {
-    color: var(--color-prime-4);
-    font-weight: 600;
-  }
+.terminal-prompt .prompt-start {
+  color: var(--color-prime-4);
+  font-weight: 600;
+}
 
-  .prompt-end {
-    color: var(--color-prime-2);
-    font-weight: 600;
-  }
+.terminal-prompt .prompt-end {
+  color: var(--color-prime-2);
+  font-weight: 600;
+}
 
-  .prompt-user {
-    color: var(--color-prime-3);
-  }
+.terminal-prompt .prompt-user {
+  color: var(--color-prime-3);
+}
 
-  .prompt-separator {
-    color: var(--color-white);
-  }
+.terminal-prompt .prompt-separator {
+  color: var(--color-white);
+}
 
-  .prompt-host {
-    color: var(--color-prime-1);
-  }
+.terminal-prompt .prompt-host {
+  color: var(--color-prime-1);
+}
 
-  .prompt-dir {
-    color: var(--color-prime-5);
-    font-weight: 600;
-  }
+.terminal-prompt .prompt-dir {
+  color: var(--color-prime-5);
+  font-weight: 600;
 }
 
 @keyframes blink {
@@ -941,32 +941,32 @@ input[type="radio"] {
   white-space: nowrap;
   width: auto;
   --cmd-max-width: 50%;
-
-  @media only screen and (max-width: 900px) {
-    --cmd-max-width: 80%;
-  }
-
   max-width: 0;
-
   transition: max-width 1s steps(16, end);
   /* animation: typing 1s steps(40, end); */
+}
 
-  .command-cmd {
-    color: var(--color-prime-1);
+@media only screen and (max-width: 900px) {
+  .terminal-command {
+    --cmd-max-width: 80%;
   }
+}
 
-  .command-arg {
-    color: var(--color-white);
-  }
+.terminal-command .command-cmd {
+  color: var(--color-prime-1);
+}
 
-  .command-option {
-    color: var(--color-white);
-  }
+.terminal-command .command-arg {
+  color: var(--color-white);
+}
 
-  .valid-dir {
-    /* font-style: italic; */
-    text-decoration: underline;
-  }
+.terminal-command .command-option {
+  color: var(--color-white);
+}
+
+.valid-dir {
+  /* font-style: italic; */
+  text-decoration: underline;
 }
 
 .terminal-result {
@@ -1012,13 +1012,11 @@ input[type="radio"] {
 .markdown-body {
   font-weight: 400;
   color: var(--color-fade);
+}
 
-  b {
-    font-weight: 600;
-    color: var(--color-white);
-  }
-
-
+.markdown-body b {
+  font-weight: 600;
+  color: var(--color-white);
 }
 
 .markdown-cite {
