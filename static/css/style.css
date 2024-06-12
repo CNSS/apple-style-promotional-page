@@ -858,7 +858,7 @@ input[type="radio"] {
   max-height: calc(100vh - 40px);
   overflow: scroll;
 
-  font-family: Cascadia Code, Fira Code, Monaco, Courier New, Consolas, Menlo, "Microsoft YaHei", "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif, monospace;
+  font-family: monospace, Cascadia Code, Fira Code, Monaco, Courier New, Consolas, Menlo, "Microsoft YaHei", "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
 }
 
 .terminal-result {
