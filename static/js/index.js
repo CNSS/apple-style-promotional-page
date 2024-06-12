@@ -12,10 +12,15 @@ title_chinese.style.setProperty('--perc', "100%")
 const cardsWrapper = document.getElementsByClassName("container cards wrapper")[0]
 let cardsLoaded = false
 
+// terminal scrolled
+// const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
+// const terminalBodies = document.getElementsByClassName("terminal-body")
+// const terminalTop = 40;
+
 document.addEventListener('scroll', (e) => {
   // 解决直接用 triggerjs 会闪烁的问题
   let scrolled = titleWrapper.style.getPropertyValue('--percent')
-  console.log(scrolled)
+  // console.log(scrolled)
   if (scrolled > 1) {
     scrolled = 1
   } else if (scrolled < 0) {
@@ -30,13 +35,24 @@ document.addEventListener('scroll', (e) => {
       // TODO: 加载 Cards
     }
   }
+
+  // terminal scrolled
+  // for (let i = 0; i < terminalBodies.length; i++) {
+  //   if (terminalBodies[i].getBoundingClientRect().top < window.innerHeight && terminalBodies[i].getBoundingClientRect().bottom > 0) {
+  //     let top = terminalBodies[i].getBoundingClientRect().top
+  //     if (Math.abs(top - terminalTop) < 1) {
+  //       console.log("top")
+  //
+  //     }
+  //   }
+  // }
 })
 
 // 切换关键词
 const keywordsWrapper = document.getElementsByClassName("container keywords wrapper")[0]
 document.addEventListener('scroll', (e) => {
   let scrolled = 1 - keywordsWrapper.style.getPropertyValue('--percent')
-  console.log(scrolled)
+  // console.log(scrolled)
   if (scrolled > 1) {
     scrolled = 1
   } else if (scrolled < 0) {
@@ -303,3 +319,90 @@ for (let i = 0; i < navBarElements.length; i++) {
   })
 }
 
+
+// terminal scrolled
+const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
+const terminalBlocks = terminalWrapper.getElementsByClassName("terminal-block")
+
+terminalWrapper.addEventListener('tg', (e) => {
+  let value = e.detail.value
+
+  let isLastResShown = false
+  for (let i = 0; i < terminalBlocks.length; i++) {
+    let cmdStart = terminalBlocks[i].getAttribute("cmd-start")
+    let resStart = terminalBlocks[i].getAttribute("res-start")
+    let hideStart = terminalBlocks[i].getAttribute("hide-start")
+
+    if (hideStart) {
+      if (value >= hideStart) {
+        terminalBlocks[i].style.display = "none"
+        continue
+      }
+    }
+
+    let cmd = terminalBlocks[i].getElementsByClassName("terminal-command")[0]
+    let cursor = terminalBlocks[i].getElementsByClassName("terminal-cursor")[0]
+    let result = terminalBlocks[i].getElementsByClassName("terminal-result")[0]
+
+    if (cmdStart && resStart) {
+      if (value < cmdStart) {
+        if (isLastResShown) {
+          terminalBlocks[i].style.display = "block"
+          terminalBlocks[i].style.transition = "none"
+          terminalBlocks[i].style.maxHeight = "5rem"
+
+          cmd.style.maxWidth = "0"
+          cmd.style.transition = "max-width 0.5s steps(20, end)"
+          cursor.style.display = "block"
+          result.style.display = "none"
+        } else {
+          if (i != 0) {
+            terminalBlocks[i].style.display = "none"
+            terminalBlocks[i].style.transition = "none"
+          }
+          terminalBlocks[i].style.maxHeight = "10rem"
+
+          cmd.style.maxWidth = "0"
+          cmd.style.transition = "none"
+        }
+      }
+
+      if (value >= cmdStart && value < resStart) {
+        terminalBlocks[i].style.display = "block"
+        terminalBlocks[i].style.transition = "none"
+        terminalBlocks[i].style.maxHeight = "5rem"
+
+        cmd.style.transition = "max-width 0.5s steps(20, end)"
+        setTimeout(() => {
+          cmd.style.maxWidth = "var(--cmd-max-width)"
+        }, 0)
+
+        cursor.style.display = "block"
+        result.style.display = "none"
+      }
+
+      isLastResShown = false
+      if (value >= resStart) {
+        terminalBlocks[i].style.display = "block"
+        terminalBlocks[i].style.transition = "max-height 0.3s steps(20, end)"
+        setTimeout(() => {
+          if (terminalBlocks[i].style.getPropertyValue("--block-max-height")) {
+            terminalBlocks[i].style.maxHeight = terminalBlocks[i].style.getPropertyValue("--block-max-height")
+          } else {
+            terminalBlocks[i].style.maxHeight = "55rem"
+          }
+        }, 0)
+
+        cmd.style.maxWidth = "var(--res-max-width)"
+        cmd.style.transition = "none"
+
+        cursor.style.display = "none"
+
+        result.style.display = "block"
+
+        isLastResShown = true
+      }
+    }
+  }
+
+})
