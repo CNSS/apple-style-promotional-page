@@ -870,10 +870,10 @@ input[type="radio"] {
 
 .terminal-line {
   padding-left: 2rem;
+  padding-right: 2rem;
 
-  font-size: 3rem;
-  letter-spacing: 0.1rem;
-  padding-right: 0.3rem;
+  font-size: 2rem;
+  /* letter-spacing: 0.1rem; */
 
   display: flex;
   display: -webkit-flex;
