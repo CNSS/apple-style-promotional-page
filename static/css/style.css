@@ -201,8 +201,22 @@ button {
   top: 10%;
 }
 
+@media only screen and (min-width:900px) {
+  .container.cards.list {
+    --card-w-h-ratio: calc(3 / 4);
+  }
+}
+
+@media only screen and (max-width:900px) {
+  .container.cards.list {
+    --card-w-h-ratio: calc(9 / 16);
+  }
+}
+
 .container.cards.list {
-  width: 100vw;
+  --card-base-width: min(70vw, calc(60vh * var(--card-w-h-ratio)));
+  --card-hover-scale: 1.02;
+  height: calc(var(--card-hover-scale) * 1.05 * var(--card-base-width) / var(--card-w-h-ratio));
   margin-top: 5%;
 }
 
@@ -223,7 +237,8 @@ button {
   width: -moz-available;
   width: -webkit-fill-available;
   width: fill-available;
-  height: 80vh;
+  align-items: center;
+  height: calc(var(--card-hover-scale) * 1.05 * var(--card-base-width) / var(--card-w-h-ratio));
   margin: 2rem 0;
   list-style: none;
 
@@ -233,51 +248,34 @@ button {
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  &::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-    /* make scrollbar transparent */
-  }
+  scroll-padding-left: 10rem;
+  scroll-padding-right: 10rem;
 }
 
-@media only screen and (min-width:900px) {
-  .card {
-    --w-h-ratio: calc(3 / 4);
-  }
-}
-
-@media only screen and (max-width:900px) {
-  .card {
-    --w-h-ratio: calc(9 / 16);
-  }
+.card-set::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
 }
 
 .card {
-  margin-top: 2%;
-  --base-width: 70vw;
-  --base-height: 70vh;
-  /* --w-h-ratio: calc(3 / 4); */
-  --width: min(var(--base-width), calc(var(--base-height) * var(--w-h-ratio)));
+  /* --card-w-h-ratio: calc(3 / 4); */
+  --width: var(--card-base-width);
   width: var(--width);
-  height: calc(var(--width) / var(--w-h-ratio));
+  height: calc(var(--width) / var(--card-w-h-ratio));
   --size: calc(var(--width) * 0.1);
   border-radius: calc(var(--size) / 2);
   font-size: calc(var(--size) / 2);
-  transition: transform .3s cubic-bezier(0, 0, 0.5, 1);
-}
-
-@media only screen and (max-width: 900px) {
-  .card {
-    margin-top: 5%;
-  }
+  /* transition: transform .3s cubic-bezier(0, 0, 0.5, 1); */
+  transition: transform .3s ease-in-out;
 }
 
 .card:hover {
-  transform: scale(1.03);
+  transform: scale(var(--card-hover-scale));
 }
 
 .card[current] {
-  transform: scale(1.03);
+  transform: scale(var(--card-hover-scale));
 }
 
 .list-items {
@@ -448,14 +446,21 @@ button {
 }
 
 .btn-icon {
-  color: #d6d6d7;
-  background-color: rgb(51, 51, 54);
+  --icon-color: #d6d6d7;
+  --icon-background: rgb(51, 51, 54);
+  --icon-hover-color: #fff;
+  --icon-hover-background: #37373a;
+  --icon-active-color: #fff;
+  --icon-active-background: #2f2f32;
+  color: var(--icon-color);
+  background-color: var(--icon-background);
   width: 5rem;
   height: 5rem;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 100ms linear, color 100ms linear;
 }
 
 .btn-icon svg {
@@ -463,7 +468,73 @@ button {
   /* inset-inline-start: 50%; */
   /* transform: translateX(-50%); */
   width: 2.5rem;
-  height: 25.rem;
+  height: 2.5rem;
+}
+
+.btn-icon:hover {
+  color: var(--icon-hover-color);
+  background-color: var(--icon-hover-background);
+}
+
+.btn-icon:active {
+  color: var(--icon-active-color);
+  background-color: var(--icon-active-background);
+}
+
+.page-button-container {
+  margin-top: 3vh;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.arrow-button {
+  transition: opacity 100ms linear;
+}
+
+.arrow-button .arrow-icon {
+  --icon-color: rgba(0, 0, 0, 0.56);
+  --icon-background: rgba(210, 210, 215, 0.64);
+  --icon-hover-color: rgba(0, 0, 0, 0.64);
+  --icon-hover-background: rgba(223, 223, 227, 0.6976);
+  --icon-active-color: rgba(0, 0, 0, 0.64);
+  --icon-active-background: rgba(193, 193, 198, 0.6544);
+}
+
+.arrow-button:disabled {
+  opacity: 0.42;
+  cursor: default;
+}
+
+.arrow-button:disabled .arrow-icon {
+  --icon-hover-color: var(--icon-color);
+  --icon-hover-background: var(--icon-background);
+  --icon-active-color: var(--icon-color);
+  --icon-active-background: var(--icon-background);
+}
+
+.arrow-icon {
+  color: var(--icon-color);
+  background-color: var(--icon-background);
+  width: 4rem;
+  height: 4rem;
+}
+
+.arrow-icon svg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .arrow-icon {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .arrow-icon svg {
+    width: 7rem;
+    height: 7rem;
+  }
 }
 
 .popup-close-btn {

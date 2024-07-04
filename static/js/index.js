@@ -406,3 +406,37 @@ terminalWrapper.addEventListener('tg', (e) => {
   }
 
 })
+
+
+const cardSet = document.querySelector('.card-set');
+const leftArrow = document.getElementById('leftArrow');
+const rightArrow = document.getElementById('rightArrow');
+let scrollAmount = 0;
+let scrollStep = cardSet.querySelector('.list-items').offsetWidth + parseFloat(getComputedStyle(cardSet).columnGap);
+
+function updateButtons() {
+  leftArrow.disabled = cardSet.scrollLeft <= 100;
+  rightArrow.disabled = cardSet.scrollLeft >= cardSet.scrollWidth - cardSet.clientWidth - 100;
+
+  scrollStep = cardSet.querySelector('.list-items').offsetWidth + parseFloat(getComputedStyle(cardSet).columnGap);
+}
+
+leftArrow.addEventListener('click', () => {
+  cardSet.scrollBy({
+    left: -scrollStep,
+    behavior: 'smooth'
+  });
+});
+
+rightArrow.addEventListener('click', () => {
+  cardSet.scrollBy({
+    left: scrollStep,
+    behavior: 'smooth'
+  });
+});
+
+cardSet.addEventListener('scroll', updateButtons);
+window.addEventListener('resize', updateButtons);
+
+// Initial check to set button states
+updateButtons();
