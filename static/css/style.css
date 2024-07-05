@@ -1238,7 +1238,18 @@ input[type="radio"] {
   opacity: 0;
   transition: opacity .3s ease-in-out;
 
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media only screen and (max-width: 900px) {
+  .faq-answer {
+    max-width: 57%;
+    font-size: 3rem;
+  }
+
+  .faq-question {
+    font-size: 4rem;
+  }
 }
 
 .faq-answer a {
