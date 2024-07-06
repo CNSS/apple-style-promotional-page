@@ -440,3 +440,86 @@ window.addEventListener('resize', updateButtons);
 
 // Initial check to set button states
 updateButtons();
+
+const faqItems = document.querySelectorAll('.faq-item');
+const faqList = document.querySelector('.faq-list');
+const faqWrapper = document.querySelectorAll('.container.faq.wrapper')[1];
+const stickyGate = 0.66
+
+faqWrapper.addEventListener('tg', () => {
+  if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+    faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+    faqList.removeAttribute('sticky');
+
+  } else {
+    faqList.setAttribute('sticky', '');
+
+    let rows = '';
+    faqItems.forEach((faqItem) => {
+      if(faqItem.hasAttribute('focused')) {
+        rows += '4fr ';
+      } else {
+        rows += '1fr ';
+      }
+    })
+
+    if (!isVertical) {
+      faqList.style.gridTemplateRows = rows;
+    }
+  }
+})
+
+faqItems.forEach((item, index) => {
+  if (!isVertical) {
+    item.addEventListener('mouseenter', () => {
+      faqItems.forEach((faqItem, i) => {
+        if (i !== index) {
+          faqItem.removeAttribute('focused');
+        } else {
+          faqItem.setAttribute('focused', '');
+        }
+      });
+
+      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+        faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+        return
+      }
+
+      const rows = Array.from({ length: faqItems.length }, (_, i) => (i === index ? '4fr' : '1fr')).join(' ');
+      faqList.style.gridTemplateRows = rows;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+
+      faqItems.forEach((faqItem) => {
+        faqItem.removeAttribute('focused');
+      });
+    });
+  }else{
+    item.addEventListener('click', () => {
+      let rows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+
+      if (item.hasAttribute('focused')) {
+        item.removeAttribute('focused');
+        rows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+      } else {
+        rows = Array.from({ length: faqItems.length }, (_, i) => (i === index ? '4fr' : '1fr')).join(' ');
+
+        faqItems.forEach((faqItem, i) => {
+          if (i !== index) {
+            faqItem.removeAttribute('focused');
+          } else {
+            faqItem.setAttribute('focused', '');
+          }
+        });
+      }
+
+      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+        faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
+        return
+      }
+      faqList.style.gridTemplateRows = rows;
+    });
+  }
+});
