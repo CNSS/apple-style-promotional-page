@@ -257,14 +257,15 @@
   <div class="container cards wrapper" tg-name="percent" tg-from="1" tg-to="0.01" tg-edge="inset">
     <div class="container cards wrapper" tg-name="rev-percent" tg-from="0" tg-to="0.99" tg-edge="inset">
       <div class="container cards sticky">
-        <b class="cards-title">
-          加入凝聚, 你将可能获得
-        </b>
+        <div class="cards-title">
+          <h1>加入凝聚, 你将可能获得</h1>
+          <span>点击卡片了解更多</span>
+        </div>
         <div class="container cards list">
           <ul class="card-set">
             <li class="list-items">
               <div class="card">
-                <div class="card face" popup="match">
+                <div class="card-face" popup="match">
                   <div class="text">
                     <h3>
                       参赛机会
@@ -284,14 +285,14 @@
                     </span>
                   </button>
                 </div>
-                <button class="card button more"></button>
+                <button class="card-button-more"></button>
               </div>
 
             </li>
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" popup="offer">
+                <div class="card-face" popup="offer">
                   <div class="text">
                     <h3>
                       实习与Offer
@@ -311,13 +312,13 @@
                     </span>
                   </button>
                 </div>
-                <button class="card button more"></button>
+                <button class="card-button-more"></button>
               </div>
             </li>
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" popup="money">
+                <div class="card-face" popup="money">
                   <div class="text">
                     <h3>
                       奖金与报酬
@@ -337,13 +338,13 @@
                     </span>
                   </button>
                 </div>
-                <button class="card button more"></button>
+                <button class="card-button-more"></button>
               </div>
             </li>
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" popup="train">
+                <div class="card-face" popup="train">
                   <div class="text">
                     <h3>
                       内部训练场
@@ -351,10 +352,10 @@
                     <span>想提升自己?</span>
                     <br />
                     <span>内部训练平台满足你!</span>
-                    <br />
-                    <br />
-                    <span style="font-style:italic; opacity: 0.8;">P.S. 我们并不会强制工作室内的成员参加比赛或参加训练,
-                      但CNSS会在你想参与比赛时随时欢迎你。</span>
+                    <!-- <br /> -->
+                    <!-- <br /> -->
+                    <!-- <span style="font-style:italic; opacity: 0.8;">P.S. 我们并不会强制工作室内的成员参加比赛或参加训练, -->
+                    <!-- 但CNSS会在你想参与比赛时随时欢迎你。</span> -->
                   </div>
                   <button class="card-more-btn">
                     <span class="btn-icon more-icon">
@@ -367,13 +368,13 @@
                     </span>
                   </button>
                 </div>
-                <button class="card button more"></button>
+                <button class="card-button-more"></button>
               </div>
             </li>
 
             <li class="list-items">
               <div class="card">
-                <div class="card face" popup="family">
+                <div class="card-face" popup="family">
                   <div class="text">
                     <h3>
                       志同道合的好友们
@@ -392,7 +393,7 @@
                     </span>
                   </button>
                 </div>
-                <button class="card button more"></button>
+                <button class="card-button-more"></button>
               </div>
             </li>
           </ul>
@@ -929,5 +930,17 @@
 <script src="static/js/index.js"></script>
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script> -->
 <script src="static/js/thirdparty/vanilla-tilt.min.js"></script>
+<script>
+  document.querySelectorAll('.card').forEach(card => {
+    VanillaTilt.init(card, {
+      max: 3,
+      glare: true,
+      "max-glare": 0.15,
+      scale: 1.03,
+      speed: 600,
+      perspective: 1000
+    });
+  });
+</script>
 
 </html>

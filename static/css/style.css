@@ -219,11 +219,28 @@ button {
   --card-base-width: min(70vw, calc(60vh * var(--card-w-h-ratio)));
   --card-hover-scale: 1.02;
   height: calc(var(--card-hover-scale) * 1.05 * var(--card-base-width) / var(--card-w-h-ratio));
-  margin-top: 5%;
+  margin-top: 1%;
 }
 
 .cards-title {
-  margin-left: 10vw;
+  margin-left: 10rem;
+  font-size: 1.5rem;
+}
+
+.cards-title h1 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.cards-title span {
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 900px) {
+  .cards-title {
+    margin-left: 5rem;
+  }
 }
 
 .card-set {
@@ -270,6 +287,7 @@ button {
   font-size: calc(var(--size) / 2);
   /* transition: transform .3s cubic-bezier(0, 0, 0.5, 1); */
   transition: transform .3s ease-in-out;
+  transform-style: preserve-3d;
 }
 
 .card:hover {
@@ -293,7 +311,7 @@ button {
   width: 2vw;
 }
 
-.card.button.more {
+.card-button-more {
   position: absolute;
   top: 0;
   left: 0;
@@ -314,7 +332,8 @@ button {
   margin: 0;
 }
 
-.card.face {
+.card-face {
+  border-radius: calc(var(--size) / 2);
   color: #fff;
   display: flex;
   width: 100%;
@@ -323,44 +342,44 @@ button {
   /* background-image: linear-gradient(45deg, #fa7671 50%, #f45f7f); */
 }
 
-.card.face[popup="match"] {
+.card-face[popup="match"] {
   background: url('/static/img/match.JPG'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: -250px;
 }
 
-.card.face[popup="offer"] {
+.card-face[popup="offer"] {
   background: url('/static/img/offer.jpg'), rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
   background-size: cover;
 }
 
-.card.face[popup="money"] {
+.card-face[popup="money"] {
   background: url('/static/img/money.png'), rgba(0, 0, 0, 0.4);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: -150px;
 }
 
-.card.face[popup="train"] {
+.card-face[popup="train"] {
   background: url('/static/img/train.png'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
 }
 
-.card.face[popup="family"] {
+.card-face[popup="family"] {
   background: url('/static/img/family.jpeg'), rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-size: cover;
   background-position-x: center;
 }
 
-.card.face .text {
+.card-face .text {
   margin: calc(var(--size) / 1.2);
 }
 
-.card.face .text h3 {
+.card-face .text h3 {
   font-size: var(--size);
   margin: 0;
   margin-bottom: calc(var(--size) / 4);
@@ -631,13 +650,16 @@ button {
 }
 
 .more-icon {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
+
+  color: rgba(0, 0, 0, 0.56);
+  background-color: rgba(210, 210, 215, 0.95);
 }
 
 .more-icon svg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 @media only screen and (max-width: 900px) {
@@ -666,6 +688,12 @@ button {
 /* .popup-content-card-image.yak img { */
 /*   opacity: calc((var(--percent)) * 4); */
 /* } */
+
+@media only screen and (max-width: 500px) {
+  .popup-content-card-image.schools {
+    --bg: url(/static/img/schools/thu.png) no-repeat center center / cover, url(/static/img/schools/pku.png) no-repeat center center / cover, url(/static/img/schools/cmu.png) no-repeat center center / cover, url(/static/img/schools/kaust.png) no-repeat center center / cover !important;
+  }
+}
 
 .popup-content-card-image.offers,
 .popup-content-card-image.schools {
@@ -755,6 +783,7 @@ nav ul li {
 nav ul li label {
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 
 .nav-bar-element:nth-child(1):checked~nav::after {
@@ -1596,3 +1625,63 @@ input[type="radio"] {
   height: 80%;
   background-color: rgba(250, 250, 250, 0.3);
 }
+
+/*
+.popup-background {
+  background-color: rgba(150, 150, 150, 0.5);
+}
+
+.popup-container {
+  backdrop-filter: blur(21px) saturate(150%);
+  -webkit-backdrop-filter: blur(21px) saturate(150%);
+  background-color: rgba(217 217 217 / 11%);
+}
+
+.popup-content {
+  color: rgba(250, 250, 250, 0.95);
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.18);
+}
+
+.popup-content h2 {
+  color: rgba(250, 250, 250, 0.8);
+}
+
+.popup-content-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-image: url('/static/img/noise.png');
+}
+
+.popup-content span {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: none;
+  font-weight: 450;
+}
+
+.popup-content b {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+}
+
+nav {
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-image: url('/static/img/noise.png');
+}
+
+nav::after {
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.close-icon {
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-image: url('/static/img/noise.png');
+  color: #fff;
+}
+*/
