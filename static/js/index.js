@@ -444,10 +444,11 @@ updateButtons();
 const faqItems = document.querySelectorAll('.faq-item');
 const faqList = document.querySelector('.faq-list');
 const faqWrapper = document.querySelectorAll('.container.faq.wrapper')[1];
-const stickyGate = 0.66
+const stickyGate = 0.25
+const stickyGateMax = 0.75
 
 faqWrapper.addEventListener('tg', () => {
-  if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+  if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate || faqWrapper.style.getPropertyValue('--rev-percent') > stickyGateMax) {
     faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
     faqList.removeAttribute('sticky');
 
@@ -480,7 +481,7 @@ faqItems.forEach((item, index) => {
         }
       });
 
-      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate || faqWrapper.style.getPropertyValue('--rev-percent') > stickyGateMax) {
         faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
         return
       }
@@ -515,7 +516,7 @@ faqItems.forEach((item, index) => {
         });
       }
 
-      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate) {
+      if (faqWrapper.style.getPropertyValue('--rev-percent') < stickyGate || faqWrapper.style.getPropertyValue('--rev-percent') > stickyGateMax) {
         faqList.style.gridTemplateRows = '1fr '.repeat(faqItems.length - 1) + '1fr';
         return
       }

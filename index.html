@@ -5,7 +5,8 @@
   <title>Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="//unpkg.com/@triggerjs/trigger" defer></script>
+  <!-- <script src="//unpkg.com/@triggerjs/trigger" defer></script> -->
+  <script src="static/js/thirdparty/trigger.js" defer></script>
   <link rel="stylesheet" href="static/css/style.css">
 </head>
 
@@ -874,12 +875,59 @@
             </span>
           </div>
         </li>
-
       </ul>
     </div>
   </div>
+
+  <div class="container business-card-wrapper" tg-name="percent" tg-from="1" tg-to="0.01" tg-edge="inset">
+    <div class="container business-card-wrapper" tg-name="rev-percent" tg-from="0" tg-to="0.99" tg-edge="inset">
+      <div class="business-card-container">
+        <div class="business-card" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.35" data-tilt-speed="600"
+          data-tilt-scale="1.03" data-tilt-max="5" data-tilt-perspective="1000">
+          <div class="business-card-header">
+            <img src="/static/img/logo-cute.png" alt="avatar" class="avatar" />
+          </div>
+          <div class="business-card-title">
+            <span class="cn">凝聚网络安全工作室</span>
+            <span class="en">COHESION NETWORK SECURITY STUDIO</span>
+          </div>
+          <!-- <span class="note">『喜欢您来』</span> -->
+          <div class="business-card-button-container">
+            <div class="business-card-button">
+              <a href="https://qm.qq.com/cgi-bin/qm/qr?k=orvO1KZRqX4j8t6-emImMrPkLN8VngfI&jump_from=webapi&authKey=C1FtvkMjWQISr3uEUo+wItGutuLGbK+oGADrmJkz+F+fFR8EXpqkc/jl+z0m17kl"
+                target="_blank" rel="noopener noreferrer">
+                <button class="button">招新群</button>
+              </a>
+            </div>
+            <split></split>
+            <div class="business-card-button">
+              <a href="https://guidelines.cnss.io" target="_blank" rel="noopener noreferrer">
+                <button class="button">Guidelines</button>
+              </a>
+            </div>
+            <split></split>
+            <div class="business-card-button">
+              <a href="https://blog.cnss.io" target=" _blank" rel="noopener noreferrer">
+                <button class="button">Blog</button>
+              </a>
+            </div>
+            <split></split>
+            <div class="business-card-button">
+              <a href="https://github.com/cnss" target="_blank" rel="noopener noreferrer">
+                <button class="button">Github</button>
+              </a>
+            </div>
+          </div>
+          <div class="business-card-footer">
+            <img src="static/img/logo.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 
 <script src="static/js/index.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script> -->
+<script src="static/js/thirdparty/vanilla-tilt.min.js"></script>
 
 </html>
