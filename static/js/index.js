@@ -138,11 +138,11 @@ function popup(popupElement) {
 }
 
 // Card List-items add popup onclick event
-const cardFaces = document.getElementsByClassName("card face")
+const cardFaces = document.getElementsByClassName("card-face")
 for (let i = 0; i < cardFaces.length; i++) {
   let popupName = cardFaces[i].getAttribute("popup")
   let popupElement = document.getElementsByClassName("popup " + popupName)[0]
-  let button = cardFaces[i].parentElement.getElementsByClassName("card button")[0]
+  let button = cardFaces[i].parentElement.getElementsByClassName("card-button-more")[0]
   button.addEventListener('click', popup.bind(this, popupElement))
 }
 
@@ -256,38 +256,47 @@ let handler = (e) => {
 
 
   // Schools 逐个出现
-  if (schools.getBoundingClientRect().top < window.innerHeight && schools.getBoundingClientRect().bottom > 0) {
-    let scrolled = 1 - schools.getBoundingClientRect().top / window.innerHeight
-    let range = [0.3, 0.8]
-    if (isVertical) {
-      range = [0, 0.3]
-    }
-    scrolled = (scrolled - range[0]) / (range[1] - range[0])
-    if (scrolled > 1) {
-      scrolled = 1
-    } else if (scrolled < 0) {
-      scrolled = 0
-    }
-    let percent = scrolled * schoolsImages.length
-    let select = Math.floor(percent)
-    let bg = ""
-    for (let i = select - 1; i >= 0; i--) {
-      bg += `url("/static/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
-    }
-    bg = bg.slice(0, -1)
-    if (schools.style.getPropertyValue('--bg') != bg) {
-      schools.style.setProperty('--bg', bg)
-      if (select < schoolsImages.length) {
-        schools.style.setProperty('--after-bg', `url("/static/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
-      } else {
-        schools.style.setProperty('--after-bg', `none`)
+  if (!isVertical) {
+    if (schools.getBoundingClientRect().top < window.innerHeight && schools.getBoundingClientRect().bottom > 0) {
+      let scrolled = 1 - schools.getBoundingClientRect().top / window.innerHeight
+      let range = [0.3, 0.8]
+      if (isVertical) {
+        range = [0, 0.3]
+      }
+      scrolled = (scrolled - range[0]) / (range[1] - range[0])
+      if (scrolled > 1) {
+        scrolled = 1
+      } else if (scrolled < 0) {
+        scrolled = 0
+      }
+      let percent = scrolled * schoolsImages.length
+      let select = Math.floor(percent)
+      let bg = ""
+      for (let i = select - 1; i >= 0; i--) {
+        bg += `url("/static/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
+      }
+      bg = bg.slice(0, -1)
+      if (schools.style.getPropertyValue('--bg') != bg) {
+        schools.style.setProperty('--bg', bg)
+        if (select < schoolsImages.length) {
+          schools.style.setProperty('--after-bg', `url("/static/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
+        } else {
+          schools.style.setProperty('--after-bg', `none`)
+        }
+      }
+      let opacity = percent - select
+      opacity = Math.round(opacity * 100) / 100
+      if (schools.style.getPropertyValue('--bg-opacity') != opacity) {
+        schools.style.setProperty('--bg-opacity', opacity)
       }
     }
-    let opacity = percent - select
-    opacity = Math.round(opacity * 100) / 100
-    if (schools.style.getPropertyValue('--bg-opacity') != opacity) {
-      schools.style.setProperty('--bg-opacity', opacity)
-    }
+  } else {
+    // 手机直接显示
+    // let bg = ""
+    // for (let i = schoolsImages.length - 1; i >= 0; i--) {
+    //   bg += `url(/static/img/schools/${schoolsImages[i]}.png) no-repeat center center / cover,`
+    // }
+    // schools.style.setProperty('--bg', bg.slice(0, -1))
   }
 }
 offerPopup.addEventListener('scroll', handler)
