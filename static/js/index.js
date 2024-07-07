@@ -330,92 +330,92 @@ for (let i = 0; i < navBarElements.length; i++) {
 
 
 // terminal scrolled
-const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
-const terminalBlocks = terminalWrapper.getElementsByClassName("terminal-block")
-
-terminalWrapper.addEventListener('tg', (e) => {
-  let value = e.detail.value
-
-  let isLastResShown = false
-  for (let i = 0; i < terminalBlocks.length; i++) {
-    let cmdStart = terminalBlocks[i].getAttribute("cmd-start")
-    let resStart = terminalBlocks[i].getAttribute("res-start")
-    let hideStart = terminalBlocks[i].getAttribute("hide-start")
-
-    if (hideStart) {
-      if (value >= hideStart) {
-        terminalBlocks[i].style.display = "none"
-        continue
-      }
-    }
-
-    let cmd = terminalBlocks[i].getElementsByClassName("terminal-command")[0]
-    let cursor = terminalBlocks[i].getElementsByClassName("terminal-cursor")[0]
-    let result = terminalBlocks[i].getElementsByClassName("terminal-result")[0]
-
-    if (cmdStart && resStart) {
-      if (value < cmdStart) {
-        if (isLastResShown) {
-          terminalBlocks[i].style.display = "block"
-          terminalBlocks[i].style.transition = "none"
-          terminalBlocks[i].style.maxHeight = "5rem"
-
-          cmd.style.maxWidth = "0"
-          cmd.style.transition = "max-width 0.5s steps(20, end)"
-          cursor.style.display = "block"
-          result.style.display = "none"
-        } else {
-          if (i != 0) {
-            terminalBlocks[i].style.display = "none"
-            terminalBlocks[i].style.transition = "none"
-          }
-          terminalBlocks[i].style.maxHeight = "10rem"
-
-          cmd.style.maxWidth = "0"
-          cmd.style.transition = "none"
-        }
-      }
-
-      if (value >= cmdStart && value < resStart) {
-        terminalBlocks[i].style.display = "block"
-        terminalBlocks[i].style.transition = "none"
-        terminalBlocks[i].style.maxHeight = "5rem"
-
-        cmd.style.transition = "max-width 0.5s steps(20, end)"
-        setTimeout(() => {
-          cmd.style.maxWidth = "var(--cmd-max-width)"
-        }, 0)
-
-        cursor.style.display = "block"
-        result.style.display = "none"
-      }
-
-      isLastResShown = false
-      if (value >= resStart) {
-        terminalBlocks[i].style.display = "block"
-        terminalBlocks[i].style.transition = "max-height 0.3s steps(20, end)"
-        setTimeout(() => {
-          if (terminalBlocks[i].style.getPropertyValue("--block-max-height")) {
-            terminalBlocks[i].style.maxHeight = terminalBlocks[i].style.getPropertyValue("--block-max-height")
-          } else {
-            terminalBlocks[i].style.maxHeight = "55rem"
-          }
-        }, 0)
-
-        cmd.style.maxWidth = "var(--res-max-width)"
-        cmd.style.transition = "none"
-
-        cursor.style.display = "none"
-
-        result.style.display = "block"
-
-        isLastResShown = true
-      }
-    }
-  }
-
-})
-
+// const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
+// const terminalBlocks = terminalWrapper.getElementsByClassName("terminal-block")
+//
+// terminalWrapper.addEventListener('tg', (e) => {
+//   let value = e.detail.value
+//
+//   let isLastResShown = false
+//   for (let i = 0; i < terminalBlocks.length; i++) {
+//     let cmdStart = terminalBlocks[i].getAttribute("cmd-start")
+//     let resStart = terminalBlocks[i].getAttribute("res-start")
+//     let hideStart = terminalBlocks[i].getAttribute("hide-start")
+//
+//     if (hideStart) {
+//       if (value >= hideStart) {
+//         terminalBlocks[i].style.display = "none"
+//         continue
+//       }
+//     }
+//
+//     let cmd = terminalBlocks[i].getElementsByClassName("terminal-command")[0]
+//     let cursor = terminalBlocks[i].getElementsByClassName("terminal-cursor")[0]
+//     let result = terminalBlocks[i].getElementsByClassName("terminal-result")[0]
+//
+//     if (cmdStart && resStart) {
+//       if (value < cmdStart) {
+//         if (isLastResShown) {
+//           terminalBlocks[i].style.display = "block"
+//           terminalBlocks[i].style.transition = "none"
+//           terminalBlocks[i].style.maxHeight = "5rem"
+//
+//           cmd.style.maxWidth = "0"
+//           cmd.style.transition = "max-width 0.5s steps(20, end)"
+//           cursor.style.display = "block"
+//           result.style.display = "none"
+//         } else {
+//           if (i != 0) {
+//             terminalBlocks[i].style.display = "none"
+//             terminalBlocks[i].style.transition = "none"
+//           }
+//           terminalBlocks[i].style.maxHeight = "10rem"
+//
+//           cmd.style.maxWidth = "0"
+//           cmd.style.transition = "none"
+//         }
+//       }
+//
+//       if (value >= cmdStart && value < resStart) {
+//         terminalBlocks[i].style.display = "block"
+//         terminalBlocks[i].style.transition = "none"
+//         terminalBlocks[i].style.maxHeight = "5rem"
+//
+//         cmd.style.transition = "max-width 0.5s steps(20, end)"
+//         setTimeout(() => {
+//           cmd.style.maxWidth = "var(--cmd-max-width)"
+//         }, 0)
+//
+//         cursor.style.display = "block"
+//         result.style.display = "none"
+//       }
+//
+//       isLastResShown = false
+//       if (value >= resStart) {
+//         terminalBlocks[i].style.display = "block"
+//         terminalBlocks[i].style.transition = "max-height 0.3s steps(20, end)"
+//         setTimeout(() => {
+//           if (terminalBlocks[i].style.getPropertyValue("--block-max-height")) {
+//             terminalBlocks[i].style.maxHeight = terminalBlocks[i].style.getPropertyValue("--block-max-height")
+//           } else {
+//             terminalBlocks[i].style.maxHeight = "55rem"
+//           }
+//         }, 0)
+//
+//         cmd.style.maxWidth = "var(--res-max-width)"
+//         cmd.style.transition = "none"
+//
+//         cursor.style.display = "none"
+//
+//         result.style.display = "block"
+//
+//         isLastResShown = true
+//       }
+//     }
+//   }
+//
+// })
+//
 
 const cardSet = document.querySelector('.card-set');
 const leftArrow = document.getElementById('leftArrow');
