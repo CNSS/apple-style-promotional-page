@@ -366,6 +366,75 @@ button {
   margin-bottom: calc(var(--size) / 4);
 }
 
+
+.card-set-flip {
+  display: flex;
+  list-style: none;
+}
+
+.card-flip {
+  /* --card-w-h-ratio: calc(3 / 4); */
+  width: var(--width);
+  height: calc(var(--width) / var(--card-w-h-ratio));
+  --size: calc(var(--width) * 0.1);
+  border-radius: calc(var(--size) / 2);
+  font-size: calc(var(--size) / 2);
+  position: relative;
+  margin: 1rem;
+}
+
+.flip {
+  --width: calc(var(--card-base-width) * 0.7);
+  backface-visibility: hidden;
+  transition: all 1s ease;
+  transform-style: preserve-3d;
+}
+
+.card-flip:hover .flip {
+  transform: rotateY(180deg);
+  --width: var(--card-base-width);
+}
+
+.side {
+  color: #333;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.front {
+  backface-visibility: hidden;
+  background: lightseagreen;
+}
+
+.back {
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: lightblue;
+}
+
+.card-flip.side .text {
+  margin: calc(var(--size) / 1.2);
+  line-height: var(--size);
+}
+
+.card-flip.side .text h2 {
+  font-size: calc(var(--size) * 1.25);
+  margin: 0;
+}
+
+.card-flip.side:hover .text h2 {
+  font-size: 0px;
+}
+
+.card-flip.side .text h3 {
+  font-size: var(--size);
+  margin: 0;
+  margin-bottom: calc(var(--size) / 4);
+}
+
 .popup-background {
   position: fixed;
   top: 0;
