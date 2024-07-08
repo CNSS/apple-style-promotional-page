@@ -3,6 +3,11 @@ if (window.innerHeight > window.innerWidth) {
   isVertical = true
 }
 
+let isTouch = false
+if ('ontouchstart' in window) {
+  isTouch = true
+}
+
 // 解决直接用 triggerjs 会闪烁的问题
 const title_chinese = document.getElementsByClassName("title_chinese")[0]
 const titleWrapper = document.getElementsByClassName("container title wrapper")[0]
@@ -138,11 +143,11 @@ function popup(popupElement) {
 }
 
 // Card List-items add popup onclick event
-const cardFaces = document.getElementsByClassName("card face")
+const cardFaces = document.getElementsByClassName("card-face")
 for (let i = 0; i < cardFaces.length; i++) {
   let popupName = cardFaces[i].getAttribute("popup")
   let popupElement = document.getElementsByClassName("popup " + popupName)[0]
-  let button = cardFaces[i].parentElement.getElementsByClassName("card button")[0]
+  let button = cardFaces[i].parentElement.getElementsByClassName("card-button-more")[0]
   button.addEventListener('click', popup.bind(this, popupElement))
 }
 
@@ -256,38 +261,47 @@ let handler = (e) => {
 
 
   // Schools 逐个出现
-  if (schools.getBoundingClientRect().top < window.innerHeight && schools.getBoundingClientRect().bottom > 0) {
-    let scrolled = 1 - schools.getBoundingClientRect().top / window.innerHeight
-    let range = [0.3, 0.8]
-    if (isVertical) {
-      range = [0, 0.3]
-    }
-    scrolled = (scrolled - range[0]) / (range[1] - range[0])
-    if (scrolled > 1) {
-      scrolled = 1
-    } else if (scrolled < 0) {
-      scrolled = 0
-    }
-    let percent = scrolled * schoolsImages.length
-    let select = Math.floor(percent)
-    let bg = ""
-    for (let i = select - 1; i >= 0; i--) {
-      bg += `url("/static/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
-    }
-    bg = bg.slice(0, -1)
-    if (schools.style.getPropertyValue('--bg') != bg) {
-      schools.style.setProperty('--bg', bg)
-      if (select < schoolsImages.length) {
-        schools.style.setProperty('--after-bg', `url("/static/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
-      } else {
-        schools.style.setProperty('--after-bg', `none`)
+  if (!isVertical) {
+    if (schools.getBoundingClientRect().top < window.innerHeight && schools.getBoundingClientRect().bottom > 0) {
+      let scrolled = 1 - schools.getBoundingClientRect().top / window.innerHeight
+      let range = [0.3, 0.8]
+      if (isVertical) {
+        range = [0, 0.3]
+      }
+      scrolled = (scrolled - range[0]) / (range[1] - range[0])
+      if (scrolled > 1) {
+        scrolled = 1
+      } else if (scrolled < 0) {
+        scrolled = 0
+      }
+      let percent = scrolled * schoolsImages.length
+      let select = Math.floor(percent)
+      let bg = ""
+      for (let i = select - 1; i >= 0; i--) {
+        bg += `url("/static/img/schools/${schoolsImages[i]}.png") no-repeat center center / cover,`
+      }
+      bg = bg.slice(0, -1)
+      if (schools.style.getPropertyValue('--bg') != bg) {
+        schools.style.setProperty('--bg', bg)
+        if (select < schoolsImages.length) {
+          schools.style.setProperty('--after-bg', `url("/static/img/schools/${schoolsImages[select]}.png") no-repeat center center / cover`)
+        } else {
+          schools.style.setProperty('--after-bg', `none`)
+        }
+      }
+      let opacity = percent - select
+      opacity = Math.round(opacity * 100) / 100
+      if (schools.style.getPropertyValue('--bg-opacity') != opacity) {
+        schools.style.setProperty('--bg-opacity', opacity)
       }
     }
-    let opacity = percent - select
-    opacity = Math.round(opacity * 100) / 100
-    if (schools.style.getPropertyValue('--bg-opacity') != opacity) {
-      schools.style.setProperty('--bg-opacity', opacity)
-    }
+  } else {
+    // 手机直接显示
+    // let bg = ""
+    // for (let i = schoolsImages.length - 1; i >= 0; i--) {
+    //   bg += `url(/static/img/schools/${schoolsImages[i]}.png) no-repeat center center / cover,`
+    // }
+    // schools.style.setProperty('--bg', bg.slice(0, -1))
   }
 }
 offerPopup.addEventListener('scroll', handler)
@@ -321,92 +335,92 @@ for (let i = 0; i < navBarElements.length; i++) {
 
 
 // terminal scrolled
-const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
-const terminalBlocks = terminalWrapper.getElementsByClassName("terminal-block")
-
-terminalWrapper.addEventListener('tg', (e) => {
-  let value = e.detail.value
-
-  let isLastResShown = false
-  for (let i = 0; i < terminalBlocks.length; i++) {
-    let cmdStart = terminalBlocks[i].getAttribute("cmd-start")
-    let resStart = terminalBlocks[i].getAttribute("res-start")
-    let hideStart = terminalBlocks[i].getAttribute("hide-start")
-
-    if (hideStart) {
-      if (value >= hideStart) {
-        terminalBlocks[i].style.display = "none"
-        continue
-      }
-    }
-
-    let cmd = terminalBlocks[i].getElementsByClassName("terminal-command")[0]
-    let cursor = terminalBlocks[i].getElementsByClassName("terminal-cursor")[0]
-    let result = terminalBlocks[i].getElementsByClassName("terminal-result")[0]
-
-    if (cmdStart && resStart) {
-      if (value < cmdStart) {
-        if (isLastResShown) {
-          terminalBlocks[i].style.display = "block"
-          terminalBlocks[i].style.transition = "none"
-          terminalBlocks[i].style.maxHeight = "5rem"
-
-          cmd.style.maxWidth = "0"
-          cmd.style.transition = "max-width 0.5s steps(20, end)"
-          cursor.style.display = "block"
-          result.style.display = "none"
-        } else {
-          if (i != 0) {
-            terminalBlocks[i].style.display = "none"
-            terminalBlocks[i].style.transition = "none"
-          }
-          terminalBlocks[i].style.maxHeight = "10rem"
-
-          cmd.style.maxWidth = "0"
-          cmd.style.transition = "none"
-        }
-      }
-
-      if (value >= cmdStart && value < resStart) {
-        terminalBlocks[i].style.display = "block"
-        terminalBlocks[i].style.transition = "none"
-        terminalBlocks[i].style.maxHeight = "5rem"
-
-        cmd.style.transition = "max-width 0.5s steps(20, end)"
-        setTimeout(() => {
-          cmd.style.maxWidth = "var(--cmd-max-width)"
-        }, 0)
-
-        cursor.style.display = "block"
-        result.style.display = "none"
-      }
-
-      isLastResShown = false
-      if (value >= resStart) {
-        terminalBlocks[i].style.display = "block"
-        terminalBlocks[i].style.transition = "max-height 0.3s steps(20, end)"
-        setTimeout(() => {
-          if (terminalBlocks[i].style.getPropertyValue("--block-max-height")) {
-            terminalBlocks[i].style.maxHeight = terminalBlocks[i].style.getPropertyValue("--block-max-height")
-          } else {
-            terminalBlocks[i].style.maxHeight = "55rem"
-          }
-        }, 0)
-
-        cmd.style.maxWidth = "var(--res-max-width)"
-        cmd.style.transition = "none"
-
-        cursor.style.display = "none"
-
-        result.style.display = "block"
-
-        isLastResShown = true
-      }
-    }
-  }
-
-})
-
+// const terminalWrapper = document.getElementsByClassName("container terminal wrapper")[0]
+// const terminalBlocks = terminalWrapper.getElementsByClassName("terminal-block")
+//
+// terminalWrapper.addEventListener('tg', (e) => {
+//   let value = e.detail.value
+//
+//   let isLastResShown = false
+//   for (let i = 0; i < terminalBlocks.length; i++) {
+//     let cmdStart = terminalBlocks[i].getAttribute("cmd-start")
+//     let resStart = terminalBlocks[i].getAttribute("res-start")
+//     let hideStart = terminalBlocks[i].getAttribute("hide-start")
+//
+//     if (hideStart) {
+//       if (value >= hideStart) {
+//         terminalBlocks[i].style.display = "none"
+//         continue
+//       }
+//     }
+//
+//     let cmd = terminalBlocks[i].getElementsByClassName("terminal-command")[0]
+//     let cursor = terminalBlocks[i].getElementsByClassName("terminal-cursor")[0]
+//     let result = terminalBlocks[i].getElementsByClassName("terminal-result")[0]
+//
+//     if (cmdStart && resStart) {
+//       if (value < cmdStart) {
+//         if (isLastResShown) {
+//           terminalBlocks[i].style.display = "block"
+//           terminalBlocks[i].style.transition = "none"
+//           terminalBlocks[i].style.maxHeight = "5rem"
+//
+//           cmd.style.maxWidth = "0"
+//           cmd.style.transition = "max-width 0.5s steps(20, end)"
+//           cursor.style.display = "block"
+//           result.style.display = "none"
+//         } else {
+//           if (i != 0) {
+//             terminalBlocks[i].style.display = "none"
+//             terminalBlocks[i].style.transition = "none"
+//           }
+//           terminalBlocks[i].style.maxHeight = "10rem"
+//
+//           cmd.style.maxWidth = "0"
+//           cmd.style.transition = "none"
+//         }
+//       }
+//
+//       if (value >= cmdStart && value < resStart) {
+//         terminalBlocks[i].style.display = "block"
+//         terminalBlocks[i].style.transition = "none"
+//         terminalBlocks[i].style.maxHeight = "5rem"
+//
+//         cmd.style.transition = "max-width 0.5s steps(20, end)"
+//         setTimeout(() => {
+//           cmd.style.maxWidth = "var(--cmd-max-width)"
+//         }, 0)
+//
+//         cursor.style.display = "block"
+//         result.style.display = "none"
+//       }
+//
+//       isLastResShown = false
+//       if (value >= resStart) {
+//         terminalBlocks[i].style.display = "block"
+//         terminalBlocks[i].style.transition = "max-height 0.3s steps(20, end)"
+//         setTimeout(() => {
+//           if (terminalBlocks[i].style.getPropertyValue("--block-max-height")) {
+//             terminalBlocks[i].style.maxHeight = terminalBlocks[i].style.getPropertyValue("--block-max-height")
+//           } else {
+//             terminalBlocks[i].style.maxHeight = "55rem"
+//           }
+//         }, 0)
+//
+//         cmd.style.maxWidth = "var(--res-max-width)"
+//         cmd.style.transition = "none"
+//
+//         cursor.style.display = "none"
+//
+//         result.style.display = "block"
+//
+//         isLastResShown = true
+//       }
+//     }
+//   }
+//
+// })
+//
 
 const cardSet = document.querySelector('.card-set');
 const leftArrow = document.getElementById('leftArrow');
@@ -524,3 +538,80 @@ faqItems.forEach((item, index) => {
     });
   }
 });
+
+
+// 循环切换 card-flip
+let flipBackground = document.getElementsByClassName("flip-background")[0]
+let cardFlips = document.getElementsByClassName("card-flip")
+cardFlips = Array.from(cardFlips)
+let pockerContainer = document.getElementsByClassName("pocker-container")[0]
+let len = cardFlips.length
+pockerContainer.style.setProperty('--total-card-count', len)
+flipBackground.style.setProperty('z-index', len + 1)
+let currentIdx = 1
+
+function closeCard() {
+  let card = document.querySelector('.card-flip[flipped]')
+  card.removeAttribute('flipped')
+  flipBackground.style.setProperty('backdrop-filter', 'blur(0px)')
+  flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(0px)')
+  setTimeout(() => {
+    flipBackground.style.display = "none"
+  }, 400)
+  document.documentElement.style.overflow = ""
+}
+
+flipBackground.addEventListener('click', closeCard)
+
+// press esc to close card
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeCard()
+  }
+})
+
+cardFlips.forEach((cardFlip) => {
+  let index = currentIdx
+  currentIdx++
+  cardFlip.style.setProperty('--index', index)
+  cardFlip.style.setProperty('z-index', index)
+
+  cardFlip.addEventListener('click', (e) => {
+    let card = e.currentTarget
+    if (!card.hasAttribute('flipped')) {
+      card.setAttribute('flipped', '')
+      flipBackground.style.display = "block"
+      setTimeout(() => {
+        flipBackground.style.setProperty('backdrop-filter', 'blur(20px)')
+        flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(20px)')
+      }, 0)
+      document.documentElement.style.overflow = "hidden"
+    }
+  })
+
+  cardFlip.addEventListener('mouseenter', (e) => {
+    let card = e.currentTarget
+    if (card.hasAttribute('flipped')) {
+      return
+    }
+    card.style.setProperty('transform', 'scale(1.1) var(--transform) translateY(-40%)')
+    let index = cardFlips.indexOf(card) + 1
+    let start = index + 1.3
+    let end = len + 0.8
+    let step = (end - start) / (len - index);
+    for (let i = 0; i <= len - index; i++) {
+      cardFlips[index + i].style.setProperty('--index', start + i * step)
+    }
+    // cardFlips[len - 1].style.setProperty('--index', end)
+  })
+
+  cardFlip.addEventListener('mouseleave', (e) => {
+    let currentIdx = 1
+    cardFlips.forEach((cardFlip) => {
+      let index = currentIdx
+      currentIdx++
+      cardFlip.style.setProperty('--index', index)
+      cardFlip.style.setProperty('transform', 'var(--transform)')
+    })
+  })
+})
