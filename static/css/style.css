@@ -2074,3 +2074,28 @@ nav::after {
 .flip-background {
   cursor: pointer;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+  .card-flip {
+    --base-width: 21vw;
+    --rotate-angle: 100deg;
+    left: 52%;
+    top: 80%;
+    --transform: rotateZ(calc(((-1 * var(--rotate-angle) / 1.1) + (var(--rotate-angle) / var(--total-card-count) * var(--index))) * var(--perc))) translateY(calc(-20% * var(--index))) translateX(calc(13% * var(--index))) var(--base-transform);
+  }
+
+  .side {
+    background-color: rgba(255 255 255 / 80%);
+  }
+
+  .flip-cards-title {
+    font-size: 3rem;
+  }
+
+  .card-flip[flipped] {
+    --width: calc(var(--base-width) * 2.5);
+    left: 48%;
+  }
+}

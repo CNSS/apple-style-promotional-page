@@ -627,6 +627,7 @@
               </div>
             </div>
           </div>
+          <placeholder></placeholder>
           <div class="card-flip">
             <div class="flip">
               <div class="side front joker red-joker">
@@ -705,6 +706,7 @@
               </div>
             </div>
           </div>
+          <placeholder></placeholder>
         </div>
       </div>
     </div>
@@ -851,24 +853,30 @@
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script> -->
 <script src="static/js/thirdparty/vanilla-tilt.min.js"></script>
 <script>
-  document.querySelectorAll('.card').forEach(card => {
-    VanillaTilt.init(card, {
-      max: 3,
-      glare: true,
-      "max-glare": 0.15,
-      scale: 1.03,
-      speed: 600,
-      perspective: 1000
+  let isTouch = false
+  if ('ontouchstart' in window) {
+    isTouch = true
+  }
+  if (!isTouch) {
+    document.querySelectorAll('.card').forEach(card => {
+      VanillaTilt.init(card, {
+        max: 3,
+        glare: true,
+        "max-glare": 0.15,
+        scale: 1.03,
+        speed: 600,
+        perspective: 1000
+      });
     });
-  });
 
-  document.querySelectorAll('.front').forEach(card => {
-    VanillaTilt.init(card, {
-      max: 3,
-      glare: true,
-      "max-glare": 0.4,
+    document.querySelectorAll('.front').forEach(card => {
+      VanillaTilt.init(card, {
+        max: 3,
+        glare: true,
+        "max-glare": 0.4,
+      });
     });
-  });
+  }
 </script>
 
 </html>
