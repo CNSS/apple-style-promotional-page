@@ -116,7 +116,7 @@ function popup(popupElement) {
   popupElement.style.opacity = 1
   this.setTimeout(() => {
     popupBackground.style.setProperty('backdrop-filter', 'blur(20px)')
-    popupBackground.style.setProperty('--webkit-backdrop-filter', 'blur(20px)')
+    popupBackground.style.setProperty('-webkit-backdrop-filter', 'blur(20px)')
     popupElement.style.top = 0
   }, 0)
 
@@ -128,7 +128,7 @@ function popup(popupElement) {
   function eventClose(popupElement) {
     popupElement.style.top = "100%"
     popupBackground.style.setProperty('backdrop-filter', 'blur(0px)')
-    popupBackground.style.setProperty('--webkit-backdrop-filter', 'blur(0px)')
+    popupBackground.style.setProperty('-webkit-backdrop-filter', 'blur(0px)')
     this.setTimeout(() => {
       popupElement.style.display = "none"
       popupBackground.style.display = "none"
@@ -554,7 +554,7 @@ function closeCard() {
   let card = document.querySelector('.card-flip[flipped]')
   card.removeAttribute('flipped')
   flipBackground.style.setProperty('backdrop-filter', 'blur(0px)')
-  flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(0px)')
+  flipBackground.style.setProperty('-webkit-backdrop-filter', 'blur(0px)')
   setTimeout(() => {
     flipBackground.style.display = "none"
   }, 400)
@@ -583,7 +583,7 @@ cardFlips.forEach((cardFlip) => {
       flipBackground.style.display = "block"
       setTimeout(() => {
         flipBackground.style.setProperty('backdrop-filter', 'blur(20px)')
-        flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(20px)')
+        flipBackground.style.setProperty('-webkit-backdrop-filter', 'blur(20px)')
       }, 0)
       document.documentElement.style.overflow = "hidden"
     }

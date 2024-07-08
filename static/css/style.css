@@ -1,9 +1,5 @@
 @import url('https://fonts.font.im/css2?family=Quicksand&display=swap');
-
-/* @import url('https://fonts.font.im/css2?family=Ga+Maamli&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch+Pop&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
 
 :root {
   font-size: calc(0.425em + 0.3vw);
@@ -468,10 +464,8 @@ button {
   display: none;
   z-index: 10;
 
-  transition: backdrop-filter .4s ease-in-out,
-    --webkit-backdrop-filter .4s ease-in-out;
+  transition: backdrop-filter .4s ease-in-out, -webkit-backdrop-filter .4s ease-in-out;
 }
-
 
 .popup {
   box-sizing: border-box;
