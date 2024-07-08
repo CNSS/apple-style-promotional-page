@@ -1,5 +1,10 @@
 @import url('https://fonts.font.im/css2?family=Quicksand&display=swap');
 
+/* @import url('https://fonts.font.im/css2?family=Ga+Maamli&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch+Pop&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
+
 :root {
   font-size: calc(0.425em + 0.3vw);
   overflow: scroll;
@@ -385,74 +390,72 @@ button {
   margin-bottom: calc(var(--size) / 4);
 }
 
-
-.card-set-flip {
-  display: flex;
-  list-style: none;
-}
-
-.card-flip {
-  /* --card-w-h-ratio: calc(3 / 4); */
-  width: var(--width);
-  height: calc(var(--width) / var(--card-w-h-ratio));
-  --size: calc(var(--width) * 0.1);
-  border-radius: calc(var(--size) / 2);
-  font-size: calc(var(--size) / 2);
-  position: relative;
-  margin: 1rem;
-}
-
-.flip {
-  --width: calc(var(--card-base-width) * 0.7);
-  backface-visibility: hidden;
-  transition: all 1s ease;
-  transform-style: preserve-3d;
-}
-
-.card-flip:hover .flip {
-  transform: rotateY(180deg);
-  --width: var(--card-base-width);
-}
-
-.side {
-  color: #333;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.front {
-  backface-visibility: hidden;
-  background: lightseagreen;
-}
-
-.back {
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-  background: lightblue;
-}
-
-.card-flip.side .text {
-  margin: calc(var(--size) / 1.2);
-  line-height: var(--size);
-}
-
-.card-flip.side .text h2 {
-  font-size: calc(var(--size) * 1.25);
-  margin: 0;
-}
-
-.card-flip.side:hover .text h2 {
-  font-size: 0px;
-}
-
-.card-flip.side .text h3 {
-  font-size: var(--size);
-  margin: 0;
-  margin-bottom: calc(var(--size) / 4);
-}
+/* .card-set-flip { */
+/*   display: flex; */
+/*   list-style: none; */
+/* } */
+/**/
+/* .card-flip { */
+/*   width: var(--width); */
+/*   height: calc(var(--width) / var(--card-w-h-ratio)); */
+/*   --size: calc(var(--width) * 0.1); */
+/*   border-radius: calc(var(--size) / 2); */
+/*   font-size: calc(var(--size) / 2); */
+/*   position: relative; */
+/*   margin: 1rem; */
+/* } */
+/**/
+/* .flip { */
+/*   --width: calc(var(--card-base-width) * 0.7); */
+/*   backface-visibility: hidden; */
+/*   transition: all 1s ease; */
+/*   transform-style: preserve-3d; */
+/* } */
+/**/
+/* .card-flip:hover .flip { */
+/*   transform: rotateY(180deg); */
+/*   --width: var(--card-base-width); */
+/* } */
+/**/
+/* .side { */
+/*   color: #333; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   position: absolute; */
+/*   left: 0; */
+/*   top: 0; */
+/* } */
+/**/
+/* .front { */
+/*   backface-visibility: hidden; */
+/*   background: lightseagreen; */
+/* } */
+/**/
+/* .back { */
+/*   backface-visibility: hidden; */
+/*   transform: rotateY(180deg); */
+/*   background: lightblue; */
+/* } */
+/**/
+/* .card-flip.side .text { */
+/*   margin: calc(var(--size) / 1.2); */
+/*   line-height: var(--size); */
+/* } */
+/**/
+/* .card-flip.side .text h2 { */
+/*   font-size: calc(var(--size) * 1.25); */
+/*   margin: 0; */
+/* } */
+/**/
+/* .card-flip.side:hover .text h2 { */
+/*   font-size: 0px; */
+/* } */
+/**/
+/* .card-flip.side .text h3 { */
+/*   font-size: var(--size); */
+/*   margin: 0; */
+/*   margin-bottom: calc(var(--size) / 4); */
+/* } */
 
 .popup-background {
   position: fixed;
@@ -463,7 +466,7 @@ button {
   -webkit-backdrop-filter: blur(0px);
   backdrop-filter: blur(0px);
   display: none;
-  z-index: 99;
+  z-index: 10;
 
   transition: backdrop-filter .4s ease-in-out,
     --webkit-backdrop-filter .4s ease-in-out;
@@ -1760,3 +1763,314 @@ nav::after {
   color: #fff;
 }
 */
+
+.container.pocker.wrapper {
+  height: 300vh;
+  background-color: #000;
+}
+
+.container.pocker.sticky {
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.flip-cards-title {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+
+  position: absolute;
+  top: 15%;
+  left: 0;
+  transform: translateY(-50%);
+
+  width: 100%;
+
+}
+
+.flip-cards-title h1 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.flip-cards-title span {
+  opacity: 0.5;
+}
+
+.pocker-container {
+  --w-h-radio: calc(2/3);
+  --total-card-count: 6;
+
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+
+  position: relative;
+  opacity: calc(min(8 * var(--rev-percent), 8 * (var(--percent) - 0.125)));
+}
+
+.card-flip {
+  --base-width: 15vw;
+  --width: var(--base-width);
+  --border-radius: calc(var(--width) / 17);
+  --rotate-angle: 100deg;
+  height: calc(var(--width) / var(--w-h-radio));
+  width: var(--width);
+  border-radius: var(--border-radius);
+
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  --fade-in-percent: max(0, min((var(--rev-percent) - 0) * 8, 1));
+  --fade-out-percent: max(0, min((var(--percent) - 0.2) * 8, 1));
+  --perc: min(var(--fade-in-percent), var(--fade-out-percent));
+  --base-transform: translate(calc(-50% + 25% * var(--perc)), -50%);
+  --transform: var(--base-transform) rotateZ(calc(((-1 * var(--rotate-angle) / 1.45) + (var(--rotate-angle) / var(--total-card-count) * var(--index))) * var(--perc)));
+  transform: var(--transform);
+  transform-origin: 25% 100%;
+
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.flip {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+
+  backface-visibility: hidden;
+  transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flip[flipped] {
+  --width: calc(var(--base-width) * 1.5);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(0deg) !important;
+  z-index: calc(var(--total-card-count) + 2) !important;
+  cursor: default;
+}
+
+.card-flip[flipped] .flip {
+  transform: rotateY(540deg) rotateZ(90deg);
+}
+
+.side {
+  color: #333;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  box-shadow: 0 0 calc(var(--width) / 50) rgba(120, 120, 120, 0.28);
+
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  background-color: rgba(230 230 230 / 60%);
+  background-image: url('/static/img/noise.png');
+}
+
+.side.front {
+  font-family: "Share Tech Mono", "Rubik Glitch Pop", "Ga Maamli", "Times New Roman", Times, serif;
+  z-index: 2;
+}
+
+.spade,
+.club,
+.black-joker {
+  --color: #0a0a0a;
+  color: var(--color);
+  fill: var(--color);
+}
+
+.heart,
+.diamond,
+.red-joker {
+  --color: #c01010;
+  color: var(--color);
+  fill: var(--color);
+}
+
+.pocker-face {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+
+  font-size: calc(var(--width) / 6);
+  font-weight: 600;
+  line-height: 0.8;
+  color: currentColor;
+
+  text-align: center;
+  letter-spacing: calc(-1 * var(--width) / 40);
+}
+
+.pocker-face .suit {
+  font-size: calc(var(--width) / 5.8);
+  width: 100%;
+}
+
+.pocker-face .suit img {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+}
+
+.pocker-face.top-left {
+  position: absolute;
+  top: calc(var(--width) / 20);
+  left: calc(var(--width) / 20);
+}
+
+.pocker-face.bottom-right {
+  position: absolute;
+  bottom: calc(var(--width) / 20);
+  right: calc(var(--width) / 20);
+  transform: rotate(180deg);
+}
+
+.pocker-title {
+  font-size: calc(var(--width) / 7);
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.pocker-title.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.joker .pocker-face {
+  transform: none;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: calc(var(--width) / 8.5);
+  letter-spacing: calc(-1 * var(--width) / 40);
+  /* letter-spacing: 0.2vw; */
+}
+
+.side.back {
+  backface-visibility: hidden;
+  transform: rotateY(180deg) !important;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.intro {
+  --padding: calc(var(--width) / 10);
+  padding: var(--padding);
+  width: calc(100% - 2 * var(--padding));
+  height: calc(100% - 2 * var(--padding));
+  text-orientation: sideways;
+  writing-mode: vertical-rl;
+
+  color: #000;
+  font-family: "Share Tech Mono", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.intro-title {
+  font-size: calc(var(--width) / 10);
+  font-weight: 600;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+}
+
+.intro-keywords {
+  font-size: calc(var(--width) / 30);
+  font-weight: 400;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  margin-left: calc(var(--width) / 20);
+
+  opacity: 0.5;
+}
+
+.intro-keywords::before {
+  content: '关键词:';
+}
+
+.intro-content {
+  font-size: calc(var(--width) / 23);
+  font-weight: 400;
+  text-align: left;
+  text-indent: calc(var(--width) / 21);
+
+  margin: 0;
+  padding: 0;
+  margin-right: calc(var(--width) / 40);
+
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.intro-content b {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.intro-subtitle {
+  font-size: calc(var(--width) / 20);
+  font-weight: 600;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+
+  margin-right: calc(var(--width) / 40);
+}
+
+.intro-subtitle::before {
+  content: '>';
+}
+
+.intro.compact {
+  --padding: calc(var(--width) / 17);
+}
+
+.intro.compact .intro-title {
+  font-size: calc(var(--width) / 13);
+}
+
+.intro.compact .intro-keywords {
+  margin-left: calc(var(--width) / 50);
+}
+
+.intro.compact .intro-content {
+  font-size: calc(var(--width) / 25.5);
+  margin-right: calc(var(--width) / 50);
+}
+
+.intro.compact .intro-subtitle {
+  font-size: calc(var(--width) / 22);
+}
+
+.card-flip[flipped] .front {
+  background-color: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-image: none;
+  z-index: -1;
+
+  opacity: 0.8;
+}
+
+.card-flip[flipped] .back {
+  z-index: 99;
+}
+
+.flip-background {
+  cursor: pointer;
+}

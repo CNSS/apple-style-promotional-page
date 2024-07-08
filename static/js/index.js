@@ -3,6 +3,11 @@ if (window.innerHeight > window.innerWidth) {
   isVertical = true
 }
 
+let isTouch = false
+if ('ontouchstart' in window) {
+  isTouch = true
+}
+
 // 解决直接用 triggerjs 会闪烁的问题
 const title_chinese = document.getElementsByClassName("title_chinese")[0]
 const titleWrapper = document.getElementsByClassName("container title wrapper")[0]
@@ -533,3 +538,80 @@ faqItems.forEach((item, index) => {
     });
   }
 });
+
+
+// 循环切换 card-flip
+let flipBackground = document.getElementsByClassName("flip-background")[0]
+let cardFlips = document.getElementsByClassName("card-flip")
+cardFlips = Array.from(cardFlips)
+let pockerContainer = document.getElementsByClassName("pocker-container")[0]
+let len = cardFlips.length
+pockerContainer.style.setProperty('--total-card-count', len)
+flipBackground.style.setProperty('z-index', len + 1)
+let currentIdx = 1
+
+function closeCard() {
+  let card = document.querySelector('.card-flip[flipped]')
+  card.removeAttribute('flipped')
+  flipBackground.style.setProperty('backdrop-filter', 'blur(0px)')
+  flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(0px)')
+  setTimeout(() => {
+    flipBackground.style.display = "none"
+  }, 400)
+  document.documentElement.style.overflow = ""
+}
+
+flipBackground.addEventListener('click', closeCard)
+
+// press esc to close card
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeCard()
+  }
+})
+
+cardFlips.forEach((cardFlip) => {
+  let index = currentIdx
+  currentIdx++
+  cardFlip.style.setProperty('--index', index)
+  cardFlip.style.setProperty('z-index', index)
+
+  cardFlip.addEventListener('click', (e) => {
+    let card = e.currentTarget
+    if (!card.hasAttribute('flipped')) {
+      card.setAttribute('flipped', '')
+      flipBackground.style.display = "block"
+      setTimeout(() => {
+        flipBackground.style.setProperty('backdrop-filter', 'blur(20px)')
+        flipBackground.style.setProperty('--webkit-backdrop-filter', 'blur(20px)')
+      }, 0)
+      document.documentElement.style.overflow = "hidden"
+    }
+  })
+
+  cardFlip.addEventListener('mouseenter', (e) => {
+    let card = e.currentTarget
+    if (card.hasAttribute('flipped')) {
+      return
+    }
+    card.style.setProperty('transform', 'scale(1.1) var(--transform) translateY(-40%)')
+    let index = cardFlips.indexOf(card) + 1
+    let start = index + 1.3
+    let end = len + 0.8
+    let step = (end - start) / (len - index);
+    for (let i = 0; i <= len - index; i++) {
+      cardFlips[index + i].style.setProperty('--index', start + i * step)
+    }
+    // cardFlips[len - 1].style.setProperty('--index', end)
+  })
+
+  cardFlip.addEventListener('mouseleave', (e) => {
+    let currentIdx = 1
+    cardFlips.forEach((cardFlip) => {
+      let index = currentIdx
+      currentIdx++
+      cardFlip.style.setProperty('--index', index)
+      cardFlip.style.setProperty('transform', 'var(--transform)')
+    })
+  })
+})
