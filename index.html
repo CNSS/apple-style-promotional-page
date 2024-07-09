@@ -194,6 +194,96 @@
     </div>
   </div>
 
+  <div class="popup family">
+    <div class="popup-container">
+      <button class="popup-close-btn">
+        <span class="btn-icon close-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+              d="M12.12,10l4.07-4.06a1.5,1.5,0,1,0-2.11-2.12L10,7.88,5.94,3.81A1.5,1.5,0,1,0,3.82,5.93L7.88,10,3.81,14.06a1.5,1.5,0,0,0,0,2.12,1.51,1.51,0,0,0,2.13,0L10,12.12l4.06,4.07a1.45,1.45,0,0,0,1.06.44,1.5,1.5,0,0,0,1.06-2.56Z">
+            </path>
+          </svg>
+        </span>
+      </button>
+      <div class="popup-content">
+        <h2>志同道合的好友们</h2>
+        <p>最重要的是认识我们大家：</p>
+        <p>一起交流技术、聚餐、玩游戏的好友们~</p>
+        <div class="popup-content-card">
+          <span>
+            CNSS<b>远不止比赛</b>。室如其名，凝聚工作室是一个<b>凝聚力很强的工作室</b>。在室内，来自<b>各个年级各个学院各个专业的同学们如同家人</b>，不论是学习还是生活上都在<b>互帮互助</b>。
+          </span>
+        </div>
+
+        <div class="popup-content-card">
+          <span>
+            除了聚在一起打比赛，工作室平时也<b>有许多人在自己的工位上学习与工作</b>。空闲时间大家会一起:
+          </span>
+
+          <br />
+          <span>
+            ## 交流技术
+          </span>
+          <div class="popup-content-card-image video-card">
+            <video src="static/img/tech.mp4" id="tech"></video>
+            <button class="video-play-btn" data-video="tech" data-playing="false">
+              <span class="btn-icon play-icon play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="control-centered-small-icon">
+                  <path class="control-icon-play"
+                    d="M5 15.25V4.77a1.44 1.44 0 0 1 1.44-1.62 1.86 1.86 0 0 1 1.11.31l8.53 5c.76.44 1.17.8 1.17 1.51s-.41 1.07-1.17 1.51l-8.53 5a1.86 1.86 0 0 1-1.11.31A1.42 1.42 0 0 1 5 15.25Z">
+                  </path>
+                </svg>
+              </span>
+              <span class="btn-icon play-icon pause">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="control-centered-small-icon">
+                  <g class="control-icon-pause">
+                    <rect width="4.5" height="14" x="3.75" y="3" rx="1.5"></rect>
+                    <rect width="4.5" height="14" x="11.75" y="3" rx="1.5"></rect>
+                  </g>
+                </svg>
+              </span>
+            </button>
+            <div class="hint">↑点击按钮播放视频</div>
+          </div>
+
+          <br />
+          <span>
+            ## 聚餐
+          </span>
+          <div class="popup-content-card-image">
+            <img src="static/img/dinner.png" alt="reimbursement" />
+          </div>
+
+          <br />
+          <span>
+            ## 打桌游
+          </span>
+          <div class="popup-content-card-image">
+            <img src="static/img/game.jpg" alt="reimbursement" />
+          </div>
+
+          <br />
+          <span>
+            ## 打游戏
+          </span>
+          <div class="popup-content-card-image">
+            <img src="static/img/game.png" alt="reimbursement" />
+          </div>
+        </div>
+
+        <div class="popup-content-card">
+          <span>
+            凝聚工作室如同一个<b>不断有新鲜血液注入的大家庭</b>，保持着<b>友好且活跃的氛围</b>。
+          </span>
+
+          <div class="popup-content-card-image">
+            <img src="static/img/together.jpg" alt="reimbursement" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container title wrapper" tg-name="percent" tg-from="1" tg-to="0.01" tg-edge="inset">
     <div class="container title wrapper" tg-name="rev-percent" tg-from="0" tg-to="0.99" tg-edge="inset">
       <div class="container title sticky">
@@ -364,7 +454,7 @@
               </div>
             </li>
 
-            <li class="list-items">
+            <li class="list-items" style="display: none;">
               <div class="card">
                 <div class="card-face" popup="train">
                   <div class="text">
@@ -401,9 +491,9 @@
                     <h3>
                       志同道合的好友们
                     </h3>
-                    <span>最重要的是认识我们大家</span>
+                    <span>最重要的是认识我们大家:</span>
                     <br />
-                    <span>一起交流技术、聚餐、玩桌游、玩游戏和好友们</span>
+                    <span>一起交流技术、聚餐、玩桌游、玩游戏的好友们~</span>
                   </div>
                   <button class="card-more-btn">
                     <span class="btn-icon more-icon">

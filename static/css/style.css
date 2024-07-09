@@ -199,7 +199,7 @@ button {
   width: fill-available;
   width: moz-available;
   display: block;
-  height: 150vh;
+  height: 120vh;
   background-color: #fafafa;
 }
 
@@ -712,6 +712,7 @@ button {
   display: flex;
   margin: 3rem 0;
   flex-direction: column;
+  position: relative;
 }
 
 .popup-content-card-image img {
@@ -959,6 +960,59 @@ input[type="radio"] {
 
 .nav-bar-element:nth-child(6):checked~.nav-images.content div {
   transform: translatex(calc(var(--nav-item-width) * 6 * -5));
+}
+
+.popup-content-card-image.video-card video {
+  object-fit: cover;
+  position: relative;
+  left: 0;
+  border-radius: 20px;
+}
+
+.video-play-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+.video-play-btn .play-icon {
+  width: 4rem;
+  height: 4rem;
+  --icon-color: rgba(0, 0, 0, 0.56);
+  --icon-background: rgb(232, 232, 237, 0.60);
+  --icon-hover-color: rgba(0, 0, 0, 0.5952);
+  --icon-hover-background: #ececf0;
+  --icon-active-color: rgba(0, 0, 0, 0.5952);
+  --icon-active-background: #dfdfe4;
+}
+
+.video-play-btn .play-icon svg {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.video-play-btn[data-playing="false"] .play-icon.pause {
+  display: none;
+}
+
+.video-play-btn[data-playing="false"] .play-icon.play {
+  display: flex;
+}
+
+.video-play-btn[data-playing="true"] .play-icon.pause {
+  display: flex;
+}
+
+.video-play-btn[data-playing="true"] .play-icon.play {
+  display: none;
+}
+
+.popup-content-card-image.video-card .hint {
+  align-self: center;
+  margin-top: .5rem;
+  font-size: 1rem;
+  opacity: 0.5;
 }
 
 .container.terminal.wrapper {

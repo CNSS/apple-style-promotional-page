@@ -425,12 +425,19 @@ for (let i = 0; i < navBarElements.length; i++) {
 const cardSet = document.querySelector('.card-set');
 const leftArrow = document.getElementById('leftArrow');
 const rightArrow = document.getElementById('rightArrow');
+const pageButtonContainer = document.querySelector('.page-button-container');
 let scrollAmount = 0;
 let scrollStep = cardSet.querySelector('.list-items').offsetWidth + parseFloat(getComputedStyle(cardSet).columnGap);
 
 function updateButtons() {
   leftArrow.disabled = cardSet.scrollLeft <= 100;
   rightArrow.disabled = cardSet.scrollLeft >= cardSet.scrollWidth - cardSet.clientWidth - 100;
+
+  if (leftArrow.disabled === true && rightArrow.disabled === true) {
+    pageButtonContainer.style.opacity = 0;
+  } else {
+    pageButtonContainer.style.opacity = 1;
+  }
 
   scrollStep = cardSet.querySelector('.list-items').offsetWidth + parseFloat(getComputedStyle(cardSet).columnGap);
 }
@@ -613,5 +620,41 @@ cardFlips.forEach((cardFlip) => {
       cardFlip.style.setProperty('--index', index)
       cardFlip.style.setProperty('transform', 'var(--transform)')
     })
+  })
+})
+
+let videoPlayBtns = document.getElementsByClassName("video-play-btn")
+Array.from(videoPlayBtns).forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let video = e.currentTarget.parentElement.getElementsByTagName("video")[0]
+    if (video.paused) {
+      video.play()
+      e.currentTarget.setAttribute('data-playing', 'true')
+    } else {
+      video.pause()
+      e.currentTarget.setAttribute('data-playing', 'false')
+    }
+  })
+})
+
+function changeBtnStatus(video) {
+  let btn = video.parentElement.getElementsByClassName("video-play-btn")[0]
+  if (video.paused) {
+    btn.setAttribute('data-playing', 'false')
+  } else {
+    btn.setAttribute('data-playing', 'true')
+  }
+}
+
+let videos = document.getElementsByTagName("video")
+Array.from(videos).forEach((video) => {
+  video.addEventListener('play', (e) => {
+    changeBtnStatus(e.currentTarget)
+  })
+  video.addEventListener('pause', (e) => {
+    changeBtnStatus(e.currentTarget)
+  })
+  video.addEventListener('ended', (e) => {
+    changeBtnStatus(e.currentTarget)
   })
 })
