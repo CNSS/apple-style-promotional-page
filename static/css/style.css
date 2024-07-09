@@ -349,39 +349,32 @@ button {
   width: 100%;
   height: 100%;
   position: relative;
+  background: var(--background) no-repeat fixed center / cover;
+  background-blend-mode: multiply;
+  background-size: cover;
   /* background-image: linear-gradient(45deg, #fa7671 50%, #f45f7f); */
 }
 
 .card-face[popup="match"] {
-  background: url('/static/img/match.JPG'), rgba(0, 0, 0, 0.3);
-  background-blend-mode: multiply;
-  background-size: cover;
+  --background: url('/static/img/match.JPG'), rgba(0, 0, 0, 0.3);
   background-position-x: -250px;
 }
 
 .card-face[popup="offer"] {
-  background: url('/static/img/offer.jpg'), rgba(0, 0, 0, 0.5);
-  background-blend-mode: multiply;
-  background-size: cover;
+  --background: url('/static/img/offer.jpg'), rgba(0, 0, 0, 0.5);
 }
 
 .card-face[popup="money"] {
-  background: url('/static/img/money.png'), rgba(0, 0, 0, 0.4);
-  background-blend-mode: multiply;
-  background-size: cover;
+  --background: url('/static/img/money.png'), rgba(0, 0, 0, 0.4);
   background-position-x: -150px;
 }
 
 .card-face[popup="train"] {
-  background: url('/static/img/train.png'), rgba(0, 0, 0, 0.3);
-  background-blend-mode: multiply;
-  background-size: cover;
+  --background: url('/static/img/train.png'), rgba(0, 0, 0, 0.3);
 }
 
 .card-face[popup="family"] {
-  background: url('/static/img/family.jpeg'), rgba(0, 0, 0, 0.3);
-  background-blend-mode: multiply;
-  background-size: cover;
+  --background: url('/static/img/family.jpeg'), rgba(0, 0, 0, 0.3);
   background-position-x: center;
 }
 
@@ -971,7 +964,7 @@ input[type="radio"] {
 
 .video-play-btn {
   position: absolute;
-  bottom: 0;
+  bottom: 3%;
   right: 0;
   transform: translate(-50%, -50%);
 }
@@ -990,6 +983,18 @@ input[type="radio"] {
 .video-play-btn .play-icon svg {
   width: 2.3rem;
   height: 2.3rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .video-play-btn .play-icon {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .video-play-btn .play-icon svg {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .video-play-btn[data-playing="false"] .play-icon.pause {
