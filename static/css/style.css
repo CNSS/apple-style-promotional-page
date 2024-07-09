@@ -3,8 +3,8 @@
 
 :root {
   font-size: calc(0.425em + 0.3vw);
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
@@ -514,6 +514,10 @@ button {
   margin-bottom: 0;
   padding: 20px;
   z-index: 999;
+}
+
+.popup-container::-webkit-scrollbar {
+  display: none;
 }
 
 @media only screen and (min-width: 1280px) {
@@ -2200,18 +2204,16 @@ footer {
   justify-content: flex-end;
   align-items: center;
 
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  bottom: 1vh;
   left: 0;
 
   width: -webkit-fill-available;
   width: fill-available;
   width: moz-available;
 
-  z-index: -999;
-
-  height: 10vh;
-  background-color: #fff;
-  color: gray;
+  background-color: transparent;
+  color: #fafafa;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   font-family: "Share Tech Mono", "Rubik Glitch Pop", "Ga Maamli", "Times New Roman", Times, serif;
 }
