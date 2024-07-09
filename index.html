@@ -854,10 +854,6 @@
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script> -->
 <script src="static/js/thirdparty/vanilla-tilt.min.js"></script>
 <script>
-  let isTouch = false
-  if ('ontouchstart' in window) {
-    isTouch = true
-  }
   if (!isTouch) {
     document.querySelectorAll('.card').forEach(card => {
       VanillaTilt.init(card, {
