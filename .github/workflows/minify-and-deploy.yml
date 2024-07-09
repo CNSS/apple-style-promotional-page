@@ -1,0 +1,32 @@
+name: minify-and-deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  checkout-minify-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Install CLI tools
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: npm install -g terser
+      - run: npm install -g csso-cli
+      - run: npm install -g html-minifier
+
+      # Use CLI tools to minify, overwriting existing files
+      - run: for i in ./static/js/*.js; do terser $i -o $i -c arguments,arrows=true -m toplevel; done
+      - run: for i in ./static/css/*.css; do csso $i -o $i; done
+      - run: for i in ./*.html; do html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true $i -o $i; done
+
+      # Push changes to `gh-pages` branch
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am 'Automated minify of ${{ github.sha }}'
+          git push --force -u origin main:gh-pages
