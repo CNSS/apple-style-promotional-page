@@ -991,27 +991,5 @@
 <script src="static/js/index.js"></script>
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script> -->
 <script src="static/js/thirdparty/vanilla-tilt.min.js"></script>
-<script>
-  if (!isTouch) {
-    document.querySelectorAll('.card').forEach(card => {
-      VanillaTilt.init(card, {
-        max: 3,
-        glare: true,
-        "max-glare": 0.15,
-        scale: 1.03,
-        speed: 600,
-        perspective: 1000
-      });
-    });
-
-    document.querySelectorAll('.front').forEach(card => {
-      VanillaTilt.init(card, {
-        max: 3,
-        glare: true,
-        "max-glare": 0.4,
-      });
-    });
-  }
-</script>
 
 </html>

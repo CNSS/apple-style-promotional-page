@@ -658,3 +658,24 @@ Array.from(videos).forEach((video) => {
     changeBtnStatus(e.currentTarget)
   })
 })
+
+if (!isTouch) {
+  document.querySelectorAll('.card').forEach(card => {
+    VanillaTilt.init(card, {
+      max: 3,
+      glare: true,
+      "max-glare": 0.15,
+      scale: 1.03,
+      speed: 600,
+      perspective: 1000
+    });
+  });
+
+  document.querySelectorAll('.front').forEach(card => {
+    VanillaTilt.init(card, {
+      max: 3,
+      glare: true,
+      "max-glare": 0.4,
+    });
+  });
+}
