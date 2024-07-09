@@ -5,6 +5,7 @@
   font-size: calc(0.425em + 0.3vw);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 
 @media only screen and (min-width: 1280px) {
@@ -15,7 +16,7 @@
 
 @media only screen and (max-width: 900px) {
   :root {
-    font-size: calc(0.2em + 0.2vw);
+    font-size: calc(0.225em + 0.2vw);
   }
 }
 
@@ -102,11 +103,15 @@ button {
 }
 
 .container.keywords.sticky {
-  min-height: 70vh;
+  --padding-top: 20vh;
+  min-height: calc(100vh - var(--padding-top));
+  max-height: calc(100vh - var(--padding-top));
   margin-left: 5rem;
   font-size: 4rem;
   position: sticky;
-  top: 20vh;
+  /* top: 20vh; */
+  padding-top: var(--padding-top);
+  top: 0;
   color: #000;
   /* opacity = -(2*x-1)^(2)+1 */
   /* opacity: calc(-1 * (3 * var(--percent) - 1.5) * (3 * var(--percent) - 1.5) + 2); */
@@ -190,14 +195,18 @@ button {
 }
 
 .container.cards.wrapper {
-  width: 100vw;
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
   display: block;
   height: 150vh;
   background-color: #fafafa;
 }
 
 .container.cards.sticky {
-  width: 100vw;
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
   font-size: 4rem;
   color: #000;
   position: relative;
@@ -224,7 +233,7 @@ button {
 }
 
 .cards-title {
-  margin-left: 10rem;
+  margin-left: 5rem;
   font-size: 1.5rem;
 }
 
@@ -234,13 +243,13 @@ button {
 }
 
 .cards-title span {
-  font-size: 1.5rem;
   opacity: 0.5;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (max-width: 900px) {
   .cards-title {
-    margin-left: 5rem;
+    margin-left: 10rem;
+    font-size: 2.3rem;
   }
 }
 
@@ -949,7 +958,10 @@ input[type="radio"] {
 }
 
 .container.terminal.wrapper {
-  width: 100vw;
+  /* width: 100vw; */
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
   height: 900vh;
   background-color: #1e1e1e;
 
@@ -1372,6 +1384,10 @@ input[type="radio"] {
 .container.business-card-wrapper {
   height: 400vh;
   background-color: #fff;
+
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
 }
 
 .business-card-container {
@@ -1379,7 +1395,10 @@ input[type="radio"] {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
+
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
 
   position: sticky;
   top: 0;
@@ -1797,7 +1816,9 @@ nav::after {
   --total-card-count: 6;
 
   height: 80vh;
-  width: 100vw;
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
   display: flex;
 
   position: relative;
@@ -2092,4 +2113,105 @@ nav::after {
     --width: calc(var(--base-width) * 2.5);
     left: 48%;
   }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-10%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.scroll-up-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: var(--color);
+
+  animation: up-down 1.5s infinite;
+}
+
+.scroll-up-icon svg {
+  width: 100%;
+  height: 100%;
+  transform: translateY(10%);
+}
+
+.scroll-up-icon:hover {
+  animation-play-state: paused;
+}
+
+.scroll-hint {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title .scroll-hint {
+  --color: gray;
+  --icon-size: 2.3rem;
+
+  bottom: 0;
+  left: 0;
+  font-size: 1.8rem;
+  font-weight: 100;
+  color: var(--color);
+  opacity: calc(1 - 8 * var(--rev-percent));
+}
+
+.keywords .scroll-hint {
+  --color: #b0b0b0;
+  --icon-size: 3rem;
+
+  bottom: 2vh;
+  left: 0;
+  opacity: calc(1 - 8 * (var(--rev-percent) - 0.875));
+}
+
+.pocker .scroll-hint {
+  --color: gray;
+  --icon-size: 3rem;
+
+  bottom: 1vh;
+  left: 0;
+
+  opacity: calc(0.4 - max(8 * (var(--rev-percent) - 0.875) * 0.4, 0));
+}
+
+.faq-list .scroll-hint {
+  --color: #b0b0b0;
+  --icon-size: 3rem;
+  bottom: .5vh;
+  left: 0;
+  opacity: calc(0.3 - max(8 * (var(--rev-percent) - 0.875) * 0.3, 0));
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: moz-available;
+
+  z-index: -999;
+
+  height: 10vh;
+  background-color: #fff;
+  color: gray;
+  font-family: "Share Tech Mono", "Rubik Glitch Pop", "Ga Maamli", "Times New Roman", Times, serif;
 }
